@@ -1,0 +1,155 @@
+{
+  "name": "Planner Executor",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -80,
+        -144
+      ],
+      "id": "72a041d9-5be5-44b0-8566-eb7e2bcdd479",
+      "name": "When chat message received",
+      "webhookId": "1b2e0580-1694-459b-a7d2-415604de7db1"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.1-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        112,
+        16
+      ],
+      "id": "d1fbd3a8-a126-43cf-bd02-0e33bffa6b6e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "muf2RccM5M3WQhbg",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a planning agent.\n\nAnalyze the request and create a detailed execution plan.\n\nReturn ONLY valid JSON.\n\n{\n  \"task_id\": \"1\",\n  \"plan\": \"...\",\n  \"confidence\": 0.0\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        144,
+        -160
+      ],
+      "id": "be6b933d-8788-409b-9eae-0e6d2af81ff6",
+      "name": "Planner Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.1-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        464,
+        16
+      ],
+      "id": "85d12cb1-7636-41fe-b959-daae2140a058",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "muf2RccM5M3WQhbg",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an execution agent.\n\nExecute the plan received from the planner.\n\nReturn ONLY valid JSON.\n\n{\n  \"task_id\": \"1\",\n  \"answer\": \"...\",\n  \"execution_summary\": \"...\",\n  \"confidence\": 0.0\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        496,
+        -160
+      ],
+      "id": "944e02f0-bf3c-4928-8916-eb6a268094d2",
+      "name": "Executor Agent"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Planner Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Planner Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Planner Agent": {
+      "main": [
+        [
+          {
+            "node": "Executor Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Executor Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "d74ffa38-529d-42d9-abfd-a412b65de64e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d5af4e43d7b10a88954f8ba447cccd120789ed6c75ae3983e2c46b8919d5923b"
+  },
+  "id": "KjEj1LF5dKC2MwNU",
+  "tags": [
+    {
+      "updatedAt": "2026-06-03T09:31:55.424Z",
+      "createdAt": "2026-06-03T09:31:55.424Z",
+      "id": "aybwzLIBifEqq4vS",
+      "name": "Evaluation of Agentic AI"
+    }
+  ]
+}

@@ -1,1 +1,4 @@
 run_id,task_id,workflow_type,start_time,end_time,duration_seconds,score,notes
+1,1,basic_agent,,,,7.5,"Concise answer but limited comparison detail"
+2,1,planner_executor,,,,8.5,"More structured and comprehensive comparison"
+3,1,planner_executor_reviewer,,,,9.0,"Best clarity; includes review and improved final answer"
