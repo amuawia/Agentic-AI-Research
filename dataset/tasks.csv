@@ -1,1 +1,31 @@
 task_id,category,task,expected_output
+1,Research,Compare OpenAI Gemini and Claude for enterprise workflow automation,Structured comparison table
+2,Research,Find three use cases of AI agents in customer support,Short research summary
+3,Research,Summarize recent trends in agentic AI automation,Executive summary
+4,Research,Compare n8n Zapier and Make for AI workflow orchestration,Comparison report
+5,Research,Identify risks of using LLM agents in business processes,Risk list with mitigations
+6,Research,Find best practices for prompt design in AI agents,Best-practice summary
+7,Research,Explain how memory improves long-running AI agents,Technical explanation
+8,Research,Compare single-agent and multi-agent architectures,Structured comparison
+9,Research,Identify evaluation metrics for AI agent systems,Metric list
+10,Research,Summarize limitations of current AI agents,Short analytical report
+11,Business,Summarize five customer complaints and propose responses,Customer support report
+12,Business,Create an executive summary from a sales performance text,Executive summary
+13,Business,Extract action items from meeting notes,Action-item list
+14,Business,Classify support tickets by priority,Priority classification
+15,Business,Generate a weekly operations report from bullet points,Operations report
+16,Business,Create a customer escalation response email,Professional email draft
+17,Business,Analyze employee feedback and identify themes,Theme analysis
+18,Business,Create a project status update from raw notes,Status report
+19,Business,Extract KPIs from a business performance paragraph,KPI table
+20,Business,Recommend automation opportunities in a small company,Automation recommendations
+21,Technical,Review a Python function and suggest improvements,Code review
+22,Technical,Write a Python script to parse a CSV file,Working code
+23,Technical,Explain an SQL query and detect possible issues,SQL review
+24,Technical,Generate an API integration plan for Gemini in n8n,Integration plan
+25,Technical,Create pseudocode for a planner executor reviewer agent,Pseudocode
+26,Technical,Debug a JavaScript function with a logical error,Debug explanation
+27,Technical,Design a simple database schema for experiment logs,Database schema
+28,Technical,Create test cases for an API endpoint,Test cases
+29,Technical,Explain how to log execution time in n8n,Implementation steps
+30,Technical,Design a workflow for AI-based ticket triage,Workflow design
