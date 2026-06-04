@@ -1,31 +1,33 @@
-task_id,category,task,expected_output
-1,Research,Compare OpenAI Gemini and Claude for enterprise workflow automation,Structured comparison table
-2,Research,Find three use cases of AI agents in customer support,Short research summary
-3,Research,Summarize recent trends in agentic AI automation,Executive summary
-4,Research,Compare n8n Zapier and Make for AI workflow orchestration,Comparison report
-5,Research,Identify risks of using LLM agents in business processes,Risk list with mitigations
-6,Research,Find best practices for prompt design in AI agents,Best-practice summary
-7,Research,Explain how memory improves long-running AI agents,Technical explanation
-8,Research,Compare single-agent and multi-agent architectures,Structured comparison
-9,Research,Identify evaluation metrics for AI agent systems,Metric list
-10,Research,Summarize limitations of current AI agents,Short analytical report
-11,Business,Summarize five customer complaints and propose responses,Customer support report
-12,Business,Create an executive summary from a sales performance text,Executive summary
-13,Business,Extract action items from meeting notes,Action-item list
-14,Business,Classify support tickets by priority,Priority classification
-15,Business,Generate a weekly operations report from bullet points,Operations report
-16,Business,Create a customer escalation response email,Professional email draft
-17,Business,Analyze employee feedback and identify themes,Theme analysis
-18,Business,Create a project status update from raw notes,Status report
-19,Business,Extract KPIs from a business performance paragraph,KPI table
-20,Business,Recommend automation opportunities in a small company,Automation recommendations
-21,Technical,Review a Python function and suggest improvements,Code review
-22,Technical,Write a Python script to parse a CSV file,Working code
-23,Technical,Explain an SQL query and detect possible issues,SQL review
-24,Technical,Generate an API integration plan for Gemini in n8n,Integration plan
-25,Technical,Create pseudocode for a planner executor reviewer agent,Pseudocode
-26,Technical,Debug a JavaScript function with a logical error,Debug explanation
-27,Technical,Design a simple database schema for experiment logs,Database schema
-28,Technical,Create test cases for an API endpoint,Test cases
-29,Technical,Explain how to log execution time in n8n,Implementation steps
-30,Technical,Design a workflow for AI-based ticket triage,Workflow design
+task_id,category,difficulty,task,expected_output
+1,Knowledge,easy,Compare OpenAI Gemini and Claude for enterprise workflow automation,Structured comparison
+2,Knowledge,easy,Explain the difference between TCP and UDP,Technical explanation
+3,Knowledge,easy,Compare REST APIs and GraphQL APIs,Comparison report
+4,Knowledge,medium,Summarize recent trends in agentic AI automation,Executive summary
+5,Knowledge,medium,Identify risks of using LLM agents in business processes,Risk assessment
+6,Knowledge,medium,Compare vector databases and relational databases,Structured comparison
+7,Knowledge,medium,Explain how memory improves long-running AI agents,Technical explanation
+8,Knowledge,hard,Identify evaluation metrics for AI agent systems,Metric framework
+9,Knowledge,hard,Analyze limitations of current autonomous AI agents,Analytical report
+10,Knowledge,hard,Recommend an enterprise architecture for AI agent governance,Architecture recommendation
+
+11,Reasoning,easy,Recommend an AI solution for automating customer support in a small company,Solution recommendation
+12,Reasoning,easy,Classify support tickets into low medium and high priority,Priority classification
+13,Reasoning,medium,Design a workflow for processing customer complaints using AI agents,Workflow design
+14,Reasoning,medium,Recommend automation opportunities for a company with 50 employees,Automation recommendations
+15,Reasoning,medium,Create a weekly operations report template for a small technology company,Report template
+16,Reasoning,medium,Draft a professional customer escalation response for a delayed software deployment,Professional response
+17,Reasoning,hard,Analyze employee feedback and identify major organizational themes,Theme analysis
+18,Reasoning,hard,Create a project status update template for a software implementation project,Status update template
+19,Reasoning,hard,Design a KPI framework for measuring AI automation success,KPI framework
+20,Reasoning,hard,Design a multi-region disaster recovery strategy for a financial institution,Disaster recovery strategy
+
+21,Coding,easy,Write a Python function to read a CSV file and count rows,Python code
+22,Coding,easy,Explain an SQL query that joins customers and orders,SQL explanation
+23,Coding,medium,Review a Python function and suggest improvements,Code review
+24,Coding,medium,Generate a Gemini API integration plan for n8n,Integration plan
+25,Coding,medium,Create pseudocode for a planner executor reviewer agent,Pseudocode
+26,Coding,hard,Debug a JavaScript function with a logical error,Debugging report
+27,Coding,hard,Design a database schema for experiment logging,Database schema
+28,Coding,hard,Create test cases for a REST API endpoint,Test cases
+29,Coding,hard,Explain how to measure execution time and latency in n8n,Implementation guide
+30,Coding,hard,Design a workflow for AI-based ticket triage in an enterprise environment,Workflow design
