@@ -9,7 +9,7 @@ task_id,category,difficulty,task,expected_output
 8,Knowledge,hard,Identify evaluation metrics for AI agent systems,Metric framework
 9,Knowledge,hard,Analyze limitations of current autonomous AI agents,Analytical report
 10,Knowledge,hard,Recommend an enterprise architecture for AI agent governance,Architecture recommendation
-
+,,,,
 11,Reasoning,easy,Recommend an AI solution for automating customer support in a small company,Solution recommendation
 12,Reasoning,easy,Classify support tickets into low medium and high priority,Priority classification
 13,Reasoning,medium,Design a workflow for processing customer complaints using AI agents,Workflow design
@@ -20,7 +20,7 @@ task_id,category,difficulty,task,expected_output
 18,Reasoning,hard,Create a project status update template for a software implementation project,Status update template
 19,Reasoning,hard,Design a KPI framework for measuring AI automation success,KPI framework
 20,Reasoning,hard,Design a multi-region disaster recovery strategy for a financial institution,Disaster recovery strategy
-
+,,,,
 21,Coding,easy,Write a Python function to read a CSV file and count rows,Python code
 22,Coding,easy,Explain an SQL query that joins customers and orders,SQL explanation
 23,Coding,medium,Review a Python function and suggest improvements,Code review

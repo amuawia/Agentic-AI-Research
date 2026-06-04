@@ -1,0 +1,414 @@
+{
+  "name": "Planner Executor",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -304,
+        -160
+      ],
+      "id": "72a041d9-5be5-44b0-8566-eb7e2bcdd479",
+      "name": "When chat message received",
+      "webhookId": "1b2e0580-1694-459b-a7d2-415604de7db1"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.1-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        0
+      ],
+      "id": "d1fbd3a8-a126-43cf-bd02-0e33bffa6b6e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "muf2RccM5M3WQhbg",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a planning agent.\n\nAnalyze the user request.\n\nCreate a step-by-step execution plan.\n\nReturn ONLY valid JSON.\n\n{\n  \"task_id\":\"1\",\n  \"objective\":\"...\",\n  \"steps\":[\n    \"step1\",\n    \"step2\",\n    \"step3\"\n  ],\n  \"confidence\":0.0\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -80,
+        -176
+      ],
+      "id": "be6b933d-8788-409b-9eae-0e6d2af81ff6",
+      "name": "Planner Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.1-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        256,
+        16
+      ],
+      "id": "85d12cb1-7636-41fe-b959-daae2140a058",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "muf2RccM5M3WQhbg",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Execute the following plan and produce the final answer:\n\n{{ $json.output }}",
+        "options": {
+          "systemMessage": "You are an execution agent.\n\nExecute the plan received from the planner.\n\nReturn ONLY valid JSON.\n\n{\n  \"task_id\": \"1\",\n  \"answer\": \"...\",\n  \"execution_summary\": \"...\",\n  \"confidence\": 0.0\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        272,
+        -176
+      ],
+      "id": "944e02f0-bf3c-4928-8916-eb6a268094d2",
+      "name": "Executor Agent"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "15FNHoEiO0XgQXA9pi4ax96vmhzKQ7UZrFNJJWDciq-A",
+          "mode": "list",
+          "cachedResultName": "Agentic_AI_Experiments",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15FNHoEiO0XgQXA9pi4ax96vmhzKQ7UZrFNJJWDciq-A/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15FNHoEiO0XgQXA9pi4ax96vmhzKQ7UZrFNJJWDciq-A/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "run_id": "={{ Date.now() }}",
+            "task_id": "={{ $json.task_id }}",
+            "workflow_type": "planner_executor",
+            "timestamp": "={{ $now }}",
+            "prompt": "={{ $('When chat message received').item.json.chatInput }}",
+            "output": "={{ $json.raw_output }}",
+            "score": "0",
+            "duration_sec": "0",
+            "token_estimate": "0",
+            "success": "TRUE",
+            "notes": "main_001_planner_executor",
+            "answer": "={{ $json.answer }}",
+            "execution_summary": "={{ $json.execution_summary }}",
+            "confidence": "={{ $json.confidence }}",
+            "experiment_id": "main_001"
+          },
+          "matchingColumns": [
+            "run_id"
+          ],
+          "schema": [
+            {
+              "id": "run_id",
+              "displayName": "run_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "experiment_id",
+              "displayName": "experiment_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "task_id",
+              "displayName": "task_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "workflow_type",
+              "displayName": "workflow_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "prompt",
+              "displayName": "prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "output",
+              "displayName": "output",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "answer",
+              "displayName": "answer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "execution_summary",
+              "displayName": "execution_summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "confidence",
+              "displayName": "confidence",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "quality_score",
+              "displayName": "quality_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "score",
+              "displayName": "score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "duration_sec",
+              "displayName": "duration_sec",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "token_estimate",
+              "displayName": "token_estimate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "success",
+              "displayName": "success",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notes",
+              "displayName": "notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "reviewer_version",
+              "displayName": "reviewer_version",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        912,
+        -208
+      ],
+      "id": "bcd5b631-a91a-4c0f-a757-6c9e0cc4b4be",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "FzjD7WocIpkKt3lu",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $json.output;\n\nlet parsed;\ntry {\n  parsed = JSON.parse(raw);\n} catch (error) {\n  parsed = {\n    task_id: \"1\",\n    answer: raw,\n    execution_summary: \"Failed to parse JSON output\",\n    confidence: 0\n  };\n}\n\nreturn [\n  {\n    json: {\n      task_id: parsed.task_id || \"1\",\n      answer: parsed.answer || \"\",\n      execution_summary: parsed.execution_summary || \"\",\n      confidence: parsed.confidence || 0,\n      raw_output: raw\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        640,
+        -176
+      ],
+      "id": "3d0a2e52-3a2f-4662-b769-475d12fa7f35",
+      "name": "Parse Agent Output"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Planner Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Planner Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Planner Agent": {
+      "main": [
+        [
+          {
+            "node": "Executor Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Executor Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Agent Output": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Executor Agent": {
+      "main": [
+        [
+          {
+            "node": "Parse Agent Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "fba4818e-efa8-4601-9a6f-861066560b49",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d5af4e43d7b10a88954f8ba447cccd120789ed6c75ae3983e2c46b8919d5923b"
+  },
+  "id": "KjEj1LF5dKC2MwNU",
+  "tags": [
+    {
+      "updatedAt": "2026-06-03T09:31:55.424Z",
+      "createdAt": "2026-06-03T09:31:55.424Z",
+      "id": "aybwzLIBifEqq4vS",
+      "name": "Evaluation of Agentic AI"
+    }
+  ]
+}
