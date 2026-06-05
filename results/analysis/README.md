@@ -41,3 +41,36 @@ Expected final size:
 ## Notes
 
 The original task_id column in the raw results should not be used for analysis because it was fixed as 1 during workflow execution. Use real_task_id from the merged task metadata instead.
+
+
+## Dataset Versions
+
+### V0.1
+Initial merged analysis dataset.
+
+### V0.2
+Corrected analysis dataset with manually verified real_task_id values.
+
+Status: Frozen
+
+
+## Workflow Types
+
+The experiment evaluates three workflow architectures:
+
+1. basic_agent
+2. planner_executor
+3. planner_executor_reviewer
+
+
+
+## Analysis Scope
+
+Planned analysis includes:
+
+- Average quality_score by workflow
+- Standard deviation by workflow
+- Quality score by category
+- Quality score by difficulty
+- Improvement percentage relative to the baseline workflow
+- Result visualizations and statistical summaries
