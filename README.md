@@ -131,10 +131,34 @@ Current Phase:
 
 **Data Analysis: Completed**
 
-**Documentation and Paper Writing: In Progress**
+**Paper Writing: Completed**
+
+**Zenodo Publication: Completed**
+
+**Research Project Version: v1.0**
+
 
 ---
+
+## Publication
+
+This research has been published on Zenodo and assigned a permanent DOI.
+
+DOI: https://doi.org/10.5281/zenodo.20606084
+
+Citation:
+
+Ali, M. (2026).
+Evaluating Multi-Agent Workflow Architectures for Enterprise AI Tasks: A Comparative Study Using Gemini and n8n.
+Zenodo.
+https://doi.org/10.5281/zenodo.20606084
+
 
 ## Author
 
 Muawia Ali
+
+Independent Researcher
+
+ORCID: https://orcid.org/0009-0000-2549-9862
+
