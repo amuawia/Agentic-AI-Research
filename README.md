@@ -1,5 +1,7 @@
 # Agentic AI Research Project
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20606084.svg)](https://doi.org/10.5281/zenodo.20606084)
+
 ## Overview
 
 This research project evaluates the effectiveness of different Agentic AI workflow architectures for enterprise-oriented tasks using n8n and Google Gemini.
@@ -146,11 +148,13 @@ This research has been published on Zenodo and assigned a permanent DOI.
 
 DOI: https://doi.org/10.5281/zenodo.20606084
 
+Zenodo Record: https://zenodo.org/records/20606084
+
 Citation:
 
-Ali, M. (2026).
-Evaluating Multi-Agent Workflow Architectures for Enterprise AI Tasks: A Comparative Study Using Gemini and n8n.
-Zenodo.
+Ali, M. (2026).  
+Evaluating Multi-Agent Workflow Architectures for Enterprise AI Tasks: A Comparative Study Using Gemini and n8n.  
+Zenodo.  
 https://doi.org/10.5281/zenodo.20606084
 
 
