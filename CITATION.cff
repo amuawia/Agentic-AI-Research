@@ -1,0 +1,56 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it using the metadata below."
+
+title: "Agentic AI Research"
+
+abstract: >
+Research repository for evaluating and benchmarking
+multi-agent AI workflow architectures across enterprise tasks
+and foundation models, including Google Gemini, OpenAI GPT,
+and Anthropic Claude.
+
+type: software
+
+authors:
+
+* family-names: "Ali"
+  given-names: "Muawia"
+  orcid: "https://orcid.org/0009-0000-2549-9862"
+
+repository-code: "https://github.com/amuawia/Agentic-AI-Research"
+
+url: "https://github.com/amuawia/Agentic-AI-Research"
+
+license: "MIT"
+
+keywords:
+
+* Agentic AI
+* Multi-Agent Systems
+* AI Workflows
+* Enterprise AI
+* Foundation Models
+* Gemini
+* GPT
+* Claude
+* n8n
+* AI Evaluation
+
+preferred-citation:
+type: article
+
+authors:
+- family-names: "Ali"
+given-names: "Muawia"
+orcid: "https://orcid.org/0009-0000-2549-9862"
+
+title: >
+Evaluating Multi-Agent Workflow Architectures
+for Enterprise AI Tasks:
+A Comparative Study Using Gemini and n8n
+
+doi: "10.5281/zenodo.20606084"
+
+publisher: "Zenodo"
+
+year: 2026

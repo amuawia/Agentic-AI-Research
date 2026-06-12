@@ -1,168 +1,156 @@
-# Agentic AI Research Project
+# Agentic AI Research
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20606084.svg)](https://doi.org/10.5281/zenodo.20606084)
+Research repository for evaluating and benchmarking multi-agent AI workflow architectures across enterprise tasks and foundation models.
 
 ## Overview
 
-This research project evaluates the effectiveness of different Agentic AI workflow architectures for enterprise-oriented tasks using n8n and Google Gemini.
+This repository contains research studies, datasets, workflows, analyses, and publications related to Agentic AI systems.
 
-The study investigates whether multi-agent workflows can improve performance, consistency, and confidence compared with a traditional single-agent approach.
+The project investigates how different workflow architectures perform across knowledge, reasoning, and coding tasks, with a focus on:
 
----
+* Single-Agent (Basic Agent)
+* Planner–Executor
+* Planner–Executor–Reviewer
 
-## Research Objective
+The research evaluates multiple foundation model providers, including:
 
-The primary objective of this study is to compare three agentic workflow architectures and measure their impact on task performance across different task categories and difficulty levels.
+* Google Gemini
+* OpenAI GPT
+* Anthropic Claude
 
-Research Question:
-
-> How do multi-agent workflow architectures affect performance on enterprise-oriented AI tasks compared with a single-agent baseline?
-
----
-
-## Workflow Architectures
-
-### 1. Basic Agent
-
-A single AI agent receives a task and produces a direct response.
-
-### 2. Planner Executor
-
-A Planner Agent first decomposes the task and generates an execution plan. An Executor Agent then performs the task based on the generated plan.
-
-### 3. Planner Executor Reviewer
-
-A Planner Agent generates a plan, an Executor Agent performs the task, and a Reviewer Agent evaluates the output and assigns a quality score.
+Performance is assessed using quality, confidence, latency, token consumption, and cost metrics.
 
 ---
 
-## Experimental Setup
+## Research Studies
 
-* Platform: n8n
-* Model: Google Gemini
-* Dataset Size: 30 Tasks
-* Categories:
+### Study 001: Multi-Agent Workflow Architectures
 
-  * Knowledge
-  * Reasoning
-  * Coding
-* Difficulty Levels:
+**Title**
 
-  * Easy
-  * Medium
-  * Hard
+Evaluating Multi-Agent Workflow Architectures for Enterprise AI Tasks: A Comparative Study Using Gemini and n8n
 
-Each task was executed on all three workflow architectures.
+**Status**
 
-Total Runs:
+Published
 
-* Pilot Runs: 9
-* Main Experiment Runs: 90
-* Total Executions: 99
+**DOI**
+
+10.5281/zenodo.20606084
+
+**Objective**
+
+Evaluate the performance of three workflow architectures across enterprise AI tasks using Gemini-based agents.
 
 ---
 
-## Key Findings
+### Study 002: Foundation Model Comparison
 
-### Overall Confidence
+**Status**
 
-| Workflow                  | Confidence |
-| ------------------------- | ---------: |
-| Basic Agent               |      0.950 |
-| Planner Executor          |      0.980 |
-| Planner Executor Reviewer |      0.987 |
+In Progress
 
-### Largest Improvements
+**Objective**
 
-| Metric              | Planner Executor | Planner Executor Reviewer |
-| ------------------- | ---------------: | ------------------------: |
-| Overall Performance |           +3.16% |                    +3.89% |
-| Reasoning Tasks     |          +10.00% |                   +11.25% |
-| Hard Tasks          |           +9.38% |                   +10.16% |
+Extend the original study by comparing workflow architectures across multiple foundation model providers:
 
-Key observation:
+* Google Gemini
+* OpenAI GPT
+* Anthropic Claude
 
-> Multi-agent architectures produced the greatest improvements on reasoning-intensive and difficult tasks while providing only limited gains for coding tasks where the base model already performed strongly.
+The study maintains a consistent workflow design and task set to enable controlled cross-provider evaluation.
+
+Target publication venues include peer-reviewed conferences and journals in artificial intelligence, software engineering, and enterprise systems.
 
 ---
 
 ## Repository Structure
 
 ```text
-Agentic-AI-Research/
-│
-├── dataset/
-├── workflows/
-├── results/
-├── figures/
-├── docs/
-├── paper/
-└── scripts/
+research/
+├── study_001_multi_agent_workflows/
+└── study_002_foundation_model_comparison/
+
+shared/
+├── datasets/
+├── prompts/
+├── templates/
+├── methodology/
+
+docs/
+
+scripts/
+
+archive/
 ```
 
 ---
 
-## Documentation
+## Workflow Architectures
 
-### Dataset and Analysis
+### Basic Agent
 
-* results/
-* results/analysis/
+Single-agent execution where one model receives the task and produces the final answer.
 
-### Figures
+### Planner–Executor
 
-* figures/workflow_summary.png
-* figures/workflow_category.png
-* figures/workflow_difficulty.png
-* figures/workflow_improvement.png
+Two-stage workflow:
 
-### Research Documentation
+1. Planner generates a task plan.
+2. Executor performs the task using the generated plan.
 
-* docs/methodology.md
-* docs/results_summary.md
-* docs/discussion.md
-* docs/threats_to_validity.md
+### Planner–Executor–Reviewer
 
----
+Three-stage workflow:
 
-## Status
-
-Current Phase:
-
-**Data Collection: Completed**
-
-**Data Analysis: Completed**
-
-**Paper Writing: Completed**
-
-**Zenodo Publication: Completed**
-
-**Research Project Version: v1.0**
-
+1. Planner creates the execution plan.
+2. Executor generates the solution.
+3. Reviewer evaluates and improves the final result.
 
 ---
 
-## Publication
+## Experimental Metrics
 
-This research has been published on Zenodo and assigned a permanent DOI.
+The research captures:
 
-DOI: https://doi.org/10.5281/zenodo.20606084
+* Quality Score
+* Confidence Score
+* Execution Duration
+* Token Consumption
+* Estimated Cost
+* Workflow Complexity
 
-Zenodo Record: https://zenodo.org/records/20606084
+These metrics support comparative analysis of workflow architectures and foundation models.
 
-Citation:
+---
 
-Ali, M. (2026).  
-Evaluating Multi-Agent Workflow Architectures for Enterprise AI Tasks: A Comparative Study Using Gemini and n8n.  
-Zenodo.  
-https://doi.org/10.5281/zenodo.20606084
+## Reproducibility
 
+All datasets, workflow definitions, prompts, and analysis artifacts required to reproduce published results are maintained in this repository whenever licensing and platform restrictions permit.
+
+---
 
 ## Author
 
 Muawia Ali
 
-Independent Researcher
+ORCID: 0009-0000-2549-9862
 
-ORCID: https://orcid.org/0009-0000-2549-9862
+Website: https://muawia.com
 
+---
+
+## Citation
+
+If you use this repository, datasets, workflows, or publications, please cite the relevant study and associated DOI where applicable.
+
+See:
+
+* CITATION.cff
+* docs/citation.md
+
+---
+
+## License
+
+See LICENSE for licensing information.
