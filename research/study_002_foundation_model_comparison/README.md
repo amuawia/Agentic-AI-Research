@@ -80,6 +80,30 @@ manuscript/
 
 In Progress
 
+### Provider Pilot Status
+
+| Provider         | Model             | Workflow Version | Pilot Status |
+| ---------------- | ----------------- | ---------------- | ------------ |
+| OpenAI           | GPT-5.5           | V1.4.3           | Complete     |
+| Google Gemini    | Gemini 2.5 Pro    | V1.4.3           | Complete     |
+| Anthropic Claude | Claude Sonnet 4.6 | V1.4.3           | Pending      |
+
+### Current Phase
+
+Completed:
+
+* OpenAI Pilot Validation
+* Gemini Pilot Validation
+
+Next:
+
+* Claude Workflow Validation
+* Claude Pilot Execution
+* Cross-Provider Schema Verification
+
+Official data collection will begin only after all provider pilots have been successfully validated.
+
+
 ## Planned Publication
 
 Peer-reviewed journal or conference submission.
