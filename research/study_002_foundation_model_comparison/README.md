@@ -91,3 +91,14 @@ Study 001:
 Evaluating Multi-Agent Workflow Architectures for Enterprise AI Tasks: A Comparative Study Using Gemini and n8n
 
 DOI: 10.5281/zenodo.20606084
+
+
+Prompt Set Version: 1.0
+Status: Frozen
+
+Frozen Date: 2026-06-12
+
+
+Official workflow version for cross-provider pilots: V1.4.3
+
+V1.4.3 must be used consistently for OpenAI, Gemini, and Claude workflows. Earlier V1.4.2 pilot outputs are retained for archival validation only and must not be mixed with official V1.4.3 analysis.

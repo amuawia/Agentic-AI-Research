@@ -1,3 +1,15 @@
+## V1.4.3 - 2026-06-13
+
+### Changed
+- Updated token and cost estimation methodology.
+- Token estimation now covers all LLM calls in each workflow architecture.
+- Planner, Executor, and Reviewer intermediate outputs are included in output token estimation.
+- Cost estimation now uses total estimated input/output tokens across all workflow stages.
+
+### Reason
+This version improves methodological consistency for comparing Basic Agent, Planner–Executor, and Planner–Executor–Reviewer workflows.
+
+
 # Changelog
 
 All notable changes to this research repository are documented in this file.
