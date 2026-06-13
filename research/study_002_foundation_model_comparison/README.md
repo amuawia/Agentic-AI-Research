@@ -102,3 +102,13 @@ Frozen Date: 2026-06-12
 Official workflow version for cross-provider pilots: V1.4.3
 
 V1.4.3 must be used consistently for OpenAI, Gemini, and Claude workflows. Earlier V1.4.2 pilot outputs are retained for archival validation only and must not be mixed with official V1.4.3 analysis.
+
+
+## Methodology Documentation
+
+The study methodology is documented under:
+
+- shared/methodology/evaluation_framework.md
+- shared/methodology/scoring_rubric.md
+- shared/methodology/token_cost_tracking.md
+- shared/methodology/study_002_statistical_analysis_plan.md
