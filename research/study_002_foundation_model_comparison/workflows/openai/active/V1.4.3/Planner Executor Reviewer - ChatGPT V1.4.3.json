@@ -240,7 +240,7 @@
             "error_message": "={{ $json.error_message }}",
             "retry_count": "={{ $json.retry_count }}",
             "notes": "pilot_openai_v002_planner_executor_reviewer",
-            "reviewer_version": "strict_v1_4_2"
+            "reviewer_version": "V1.4.3"
           },
           "matchingColumns": [
             "run_id"
@@ -765,7 +765,7 @@
     "executionOrder": "v1",
     "availableInMCP": false
   },
-  "versionId": "87c7619d-30f0-4323-a905-11fe590e0492",
+  "versionId": "1ec9b751-b6a7-4e70-81b6-21b3ca0e3650",
   "meta": {
     "instanceId": "d5af4e43d7b10a88954f8ba447cccd120789ed6c75ae3983e2c46b8919d5923b"
   },

@@ -104,7 +104,8 @@
             "api_status": "={{ $json.api_status }}",
             "error_message": "={{ $json.error_message }}",
             "retry_count": "={{ $json.retry_count }}",
-            "notes": "pilot_openai_v002_planner_executor"
+            "notes": "pilot_openai_v002_planner_executor",
+            "reviewer_version": "V1.4.3"
           },
           "matchingColumns": [
             "run_id"
@@ -701,7 +702,7 @@
     "executionOrder": "v1",
     "availableInMCP": false
   },
-  "versionId": "49562306-241c-4e54-b7bd-d35195214aaa",
+  "versionId": "1ed5a861-ffcb-4113-b7b6-487293960f12",
   "meta": {
     "instanceId": "d5af4e43d7b10a88954f8ba447cccd120789ed6c75ae3983e2c46b8919d5923b"
   },

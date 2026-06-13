@@ -156,7 +156,7 @@
             "error_message": "={{ $json.error_message }}",
             "retry_count": "={{ $json.retry_count }}",
             "notes": "pilot_openai_v002_basic_agent",
-            "reviewer_version": "V1.4.2"
+            "reviewer_version": "V1.4.3"
           },
           "matchingColumns": [
             "run_id"
@@ -637,7 +637,7 @@
     "executionOrder": "v1",
     "availableInMCP": false
   },
-  "versionId": "e3d4f9b8-ffb1-4cf6-a1bb-da9912404e47",
+  "versionId": "ee071c7c-3a22-49aa-b259-bc1a2d285498",
   "meta": {
     "instanceId": "d5af4e43d7b10a88954f8ba447cccd120789ed6c75ae3983e2c46b8919d5923b"
   },

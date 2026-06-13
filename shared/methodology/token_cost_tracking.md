@@ -94,3 +94,31 @@ Token estimation considered only final workflow outputs.
 Token estimation includes all LLM calls and intermediate outputs across workflow stages.
 
 This version is the official methodology for Study 002 provider comparison experiments.
+
+# Provider Pricing Reference
+
+## Purpose
+
+This table documents the public API pricing used for estimated cost calculations in Study 002.
+
+The pricing values are used exclusively for cost estimation and do not represent actual billed costs.
+
+## Pricing Reference
+
+| Provider  | Model             | Input Cost (USD / 1M Tokens) | Output Cost (USD / 1M Tokens) |
+| --------- | ----------------- | ---------------------------: | ----------------------------: |
+| OpenAI    | GPT-5.5           |                         2.50 |                         15.00 |
+| Google    | Gemini 2.5 Pro    |                         1.25 |                         10.00 |
+| Anthropic | Claude Sonnet 4.6 |                         3.00 |                         15.00 |
+
+## Pricing Effective Date
+
+2026-06-13
+
+## Notes
+
+* Prices are based on publicly available provider pricing at the time of study preparation.
+* Estimated costs are calculated using estimated token counts.
+* Actual provider billing may differ from estimated values.
+* If provider pricing changes during the study, the pricing table must be updated and documented through version control.
+
