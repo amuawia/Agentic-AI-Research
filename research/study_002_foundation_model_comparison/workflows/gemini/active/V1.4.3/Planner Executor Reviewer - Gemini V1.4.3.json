@@ -1,0 +1,763 @@
+{
+  "name": "Planner Executor Reviewer - Gemini V1.4.3",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "84632036-a554-44e3-ad70-c83860b4dda2",
+      "name": "When chat message received",
+      "webhookId": "1d3f41c4-7703-4726-8dc9-104a9d0db6ec"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "options": {
+          "systemMessage": "You are a planning agent.\n\nAnalyze the user request.\n\nCreate a step-by-step execution plan.\nKeep the plan concise. Do not exceed 120 words.\nReturn no more than 5 steps.\n\nReturn ONLY valid JSON.\n\n{\n  \"task_id\":\"1\",\n  \"objective\":\"...\",\n  \"steps\":[\n    \"step1\",\n    \"step2\",\n    \"step3\"\n  ],\n  \"confidence\":0.0\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        336,
+        0
+      ],
+      "id": "22a80949-0015-4624-80b6-4caa9d8e3392",
+      "name": "Planner Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Execute the following plan and produce the final answer:\n\n{{ $json.output }}",
+        "options": {
+          "systemMessage": "You are an execution agent.\n\nExecute the plan received from the planner.\nKeep the final answer concise and structured.\nDo not exceed 250 words.\nThe \"answer\" field must be a plain text string, not an object or array.\n\nReturn ONLY valid JSON.\n\n{\n  \"task_id\": \"1\",\n  \"answer\": \"...\",\n  \"execution_summary\": \"...\",\n  \"confidence\": 0.0\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        640,
+        0
+      ],
+      "id": "b2c351c2-1abb-439d-9e31-758c62695c8a",
+      "name": "Executor Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a strict academic evaluator.\n\nOriginal Task:\n{{ $('When chat message received').item.json.chatInput }}\n\nExecution Result:\n{{ $json.output }}\n\nEvaluate the response on:\n1. Accuracy\n2. Completeness\n3. Reasoning Quality\n4. Clarity\n\nScore from 0.0 to 1.0.\n\nImportant:\n- review_notes must contain your evaluation comments.\n- final_answer must contain the improved final answer to the original task.\n- final_answer must NOT describe or review the response.\n- final_answer must answer the original user task directly.\n- final_answer must be a plain text string, not an object or array.\n- Keep final_answer concise and structured.\n- Do not exceed 250 words.\n\nReturn JSON only:\n\n{\n  \"task_id\": \"1\",\n  \"quality_score\": 0.0,\n  \"review_notes\": \"...\",\n  \"final_answer\": \"...\",\n  \"confidence\": 0.0\n}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        928,
+        0
+      ],
+      "id": "578424e5-7245-4988-8f9f-3f3eef469be7",
+      "name": "Reviewer Agent"
+    },
+    {
+      "parameters": {
+        "jsCode": "// V1.4.3 - Planner Executor Reviewer - all LLM call token estimation\n\nconst startMs = $('Set Start Time').item.json.start_ms || Date.now();\nconst endMs = Date.now();\nconst durationSec = Math.round((endMs - startMs) / 100) / 10;\n\nconst startIso = new Date(startMs).toISOString();\nconst endIso = new Date(endMs).toISOString();\n\nlet raw = $json.output || \"\";\n\nraw = raw\n  .replace(/^```json\\s*/i, '')\n  .replace(/^```\\s*/i, '')\n  .replace(/\\s*```$/i, '')\n  .trim();\n\nlet parsed;\ntry {\n  parsed = JSON.parse(raw);\n} catch (e) {\n  parsed = {\n    task_id: \"1\",\n    answer: raw,\n    execution_summary: \"Failed to parse JSON output\",\n    confidence: 0,\n    quality_score: 0\n  };\n}\n\nconst task_id = parsed.task_id || \"1\";\nconst answer = parsed.answer || parsed.final_answer || \"\";\nconst execution_summary = parsed.execution_summary || parsed.review_notes || \"\";\nconst quality_score = parsed.quality_score !== undefined && parsed.quality_score !== null ? parsed.quality_score : 0;\nlet confidence = parsed.confidence !== undefined && parsed.confidence !== null ? Number(parsed.confidence) : 0;\n\nif (confidence > 1 && confidence <= 10) {\n  confidence = confidence / 10;\n}\n\nconfidence = Math.max(0, Math.min(1, confidence));\n\nconst userPrompt = $('When chat message received').item.json.chatInput || \"\";\n\nconst plannerSystemPrompt = `You are a planning agent.\n\nAnalyze the user request.\n\nCreate a step-by-step execution plan.\nKeep the plan concise. Do not exceed 120 words.\nReturn no more than 5 steps.\n\nReturn ONLY valid JSON.\n\n{\n  \"task_id\":\"1\",\n  \"objective\":\"...\",\n  \"steps\":[\n    \"step1\",\n    \"step2\",\n    \"step3\"\n  ],\n  \"confidence\":0.0\n}`;\n\nconst executorSystemPrompt = `You are an execution agent.\n\nExecute the plan received from the planner.\nKeep the final answer concise and structured.\nDo not exceed 250 words.\nThe \"answer\" field must be a plain text string, not an object or array.\n\nReturn ONLY valid JSON.\n\n{\n  \"task_id\": \"1\",\n  \"answer\": \"...\",\n  \"execution_summary\": \"...\",\n  \"confidence\": 0.0\n}`;\n\nconst plannerOutput = $('Planner Agent').item.json.output || \"\";\nconst executorOutput = $('Executor Agent').item.json.output || \"\";\nconst reviewerOutput = raw;\n\nconst plannerInputText =\n  plannerSystemPrompt + \"\\n\" +\n  userPrompt;\n\nconst executorInputText =\n  executorSystemPrompt + \"\\n\" +\n  \"Execute the following plan and produce the final answer:\\n\\n\" +\n  plannerOutput;\n\nconst reviewerInputText = `You are a strict academic evaluator.\n\nOriginal Task:\n${userPrompt}\n\nExecution Result:\n${executorOutput}\n\nEvaluate the response on:\n1. Accuracy\n2. Completeness\n3. Reasoning Quality\n4. Clarity\n\nScore from 0.0 to 1.0.\n\nImportant:\n- review_notes must contain your evaluation comments.\n- final_answer must contain the improved final answer to the original task.\n- final_answer must NOT describe or review the response.\n- final_answer must answer the original user task directly.\n- final_answer must be a plain text string, not an object or array.\n- Keep final_answer concise and structured.\n- Do not exceed 250 words.\n\nReturn JSON only:\n\n{\n  \"task_id\": \"1\",\n  \"quality_score\": 0.0,\n  \"review_notes\": \"...\",\n  \"final_answer\": \"...\",\n  \"confidence\": 0.0\n}`;\n\nconst inputTokens =\n  Math.max(1, Math.round(plannerInputText.length / 4)) +\n  Math.max(1, Math.round(executorInputText.length / 4)) +\n  Math.max(1, Math.round(reviewerInputText.length / 4));\n\nconst outputTokens =\n  Math.max(1, Math.round(plannerOutput.length / 4)) +\n  Math.max(1, Math.round(executorOutput.length / 4)) +\n  Math.max(1, Math.round(reviewerOutput.length / 4));\n\nconst totalTokens = inputTokens + outputTokens;\n\nconst inputPricePer1M = 1.25;\nconst outputPricePer1M = 10.0;\n\nconst costUsd = Number(((inputTokens / 1000000 * inputPricePer1M) + (outputTokens / 1000000 * outputPricePer1M)).toFixed(6));\n\nreturn [{\n  json: {\n    task_id,\n    answer,\n    execution_summary,\n    confidence,\n    quality_score,\n    raw_output: raw,\n    duration_sec: durationSec,\n    input_tokens: inputTokens,\n    output_tokens: outputTokens,\n    total_tokens: totalTokens,\n    cost_usd: costUsd,\n    cost_method: \"estimated_char_count_all_llm_calls\",\n    input_token_method: \"estimated_effective_prompt_length_all_llm_calls\",\n    output_token_method: \"estimated_all_llm_outputs_length\",\n    error_message: \"token_count_estimated\",\n    retry_count: 0,\n    model_temperature: 1.0,\n    api_status: \"success\",\n    workflow_version: \"V1.4.3\",\n    prompt_version: \"frozen_v1\",\n    llm_call_count: 3,\n    start_time_iso: startIso,\n    end_time_iso: endIso,\n    input_price_per_1m: inputPricePer1M,\n    output_price_per_1m: outputPricePer1M\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1216,
+        0
+      ],
+      "id": "31dc67d0-4387-4173-851f-164a6f233c5d",
+      "name": "Parse Agent Output"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "start_ms",
+              "name": "start_ms",
+              "value": "={{ Date.now() }}",
+              "type": "number"
+            },
+            {
+              "id": "start_time_iso",
+              "name": "start_time_iso",
+              "value": "={{ $now }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        160,
+        0
+      ],
+      "id": "81038eed-f30a-4d87-9c4f-44a1b433055c",
+      "name": "Set Start Time"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1prgy8SgQumRO4z3afUF9jwCGTnm5cmxq2V4-x-8dM20",
+          "mode": "list",
+          "cachedResultName": "Agentic_AI_Experiments_V1.0",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1prgy8SgQumRO4z3afUF9jwCGTnm5cmxq2V4-x-8dM20/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Agentic_AI_Experiments_V1.0",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1prgy8SgQumRO4z3afUF9jwCGTnm5cmxq2V4-x-8dM20/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "run_id": "={{ $('Set Start Time').item.json.start_ms }}",
+            "experiment_id": "pilot_gemini_v002",
+            "task_id": "={{ $json.task_id }}",
+            "workflow_type": "planner_executor_reviewer",
+            "workflow_version": "={{ $json.workflow_version }}",
+            "prompt_version": "={{ $json.prompt_version }}",
+            "timestamp": "={{ $json.end_time_iso }}",
+            "start_time_iso": "={{ $json.start_time_iso }}",
+            "end_time_iso": "={{ $json.end_time_iso }}",
+            "Provider": "=Google",
+            "Model": "=gemini-2.5-pro",
+            "model_temperature": "={{ $json.model_temperature }}",
+            "llm_call_count": "={{ $json.llm_call_count }}",
+            "prompt": "={{ $('When chat message received').item.json.chatInput }}",
+            "output": "={{ $json.raw_output }}",
+            "answer": "={{ $json.answer }}",
+            "execution_summary": "={{ $json.execution_summary }}",
+            "quality_score": "={{ $json.quality_score }}",
+            "confidence": "={{ $json.confidence }}",
+            "score": "={{ $json.quality_score }}",
+            "duration_sec": "={{ $json.duration_sec }}",
+            "input_tokens": "={{ $json.input_tokens }}",
+            "output_tokens": "={{ $json.output_tokens }}",
+            "total_tokens": "={{ $json.total_tokens }}",
+            "input_token_method": "={{ $json.input_token_method }}",
+            "output_token_method": "={{ $json.output_token_method }}",
+            "cost_usd": "={{ $json.cost_usd }}",
+            "cost_method": "={{ $json.cost_method }}",
+            "input_price_per_1m": "={{ $json.input_price_per_1m }}",
+            "output_price_per_1m": "={{ $json.output_price_per_1m }}",
+            "token_estimate": "={{ $json.total_tokens }}",
+            "success": "TRUE",
+            "api_status": "={{ $json.api_status }}",
+            "error_message": "={{ $json.error_message }}",
+            "retry_count": "={{ $json.retry_count }}",
+            "notes": "pilot_gemini_v002_planner_executor_reviewer",
+            "reviewer_version": "V1.4.3"
+          },
+          "matchingColumns": [
+            "run_id"
+          ],
+          "schema": [
+            {
+              "id": "run_id",
+              "displayName": "run_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "experiment_id",
+              "displayName": "experiment_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "task_id",
+              "displayName": "task_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "task_category",
+              "displayName": "task_category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "task_difficulty",
+              "displayName": "task_difficulty",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "workflow_type",
+              "displayName": "workflow_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "workflow_version",
+              "displayName": "workflow_version",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "prompt_version",
+              "displayName": "prompt_version",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "start_time_iso",
+              "displayName": "start_time_iso",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "end_time_iso",
+              "displayName": "end_time_iso",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Provider",
+              "displayName": "Provider",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Model",
+              "displayName": "Model",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "model_temperature",
+              "displayName": "model_temperature",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "llm_call_count",
+              "displayName": "llm_call_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "prompt",
+              "displayName": "prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "output",
+              "displayName": "output",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "answer",
+              "displayName": "answer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "execution_summary",
+              "displayName": "execution_summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "quality_score",
+              "displayName": "quality_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "confidence",
+              "displayName": "confidence",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "score",
+              "displayName": "score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "duration_sec",
+              "displayName": "duration_sec",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "input_tokens",
+              "displayName": "input_tokens",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "output_tokens",
+              "displayName": "output_tokens",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "total_tokens",
+              "displayName": "total_tokens",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "input_token_method",
+              "displayName": "input_token_method",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "output_token_method",
+              "displayName": "output_token_method",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cost_usd",
+              "displayName": "cost_usd",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cost_method",
+              "displayName": "cost_method",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "input_price_per_1m",
+              "displayName": "input_price_per_1m",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "output_price_per_1m",
+              "displayName": "output_price_per_1m",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "token_estimate",
+              "displayName": "token_estimate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "success",
+              "displayName": "success",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "api_status",
+              "displayName": "api_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "error_message",
+              "displayName": "error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "retry_count",
+              "displayName": "retry_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "reviewer_version",
+              "displayName": "reviewer_version",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "notes",
+              "displayName": "notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1440,
+        0
+      ],
+      "id": "da83e587-d270-447e-b315-429f05e2648b",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "FzjD7WocIpkKt3lu",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        336,
+        240
+      ],
+      "id": "8a815ced-b746-48ef-a47b-c551b1fa4c63",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "qC5lzlvlOrS05fhh",
+          "name": "Google Gemini(PaLM) Agentic AI Research"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        640,
+        224
+      ],
+      "id": "d02d2412-2a06-4b23-adc6-6205857a7f5f",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "qC5lzlvlOrS05fhh",
+          "name": "Google Gemini(PaLM) Agentic AI Research"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        928,
+        224
+      ],
+      "id": "b221112a-89f0-4648-ab31-11d92471a26b",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "qC5lzlvlOrS05fhh",
+          "name": "Google Gemini(PaLM) Agentic AI Research"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Set Start Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Planner Agent": {
+      "main": [
+        [
+          {
+            "node": "Executor Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Executor Agent": {
+      "main": [
+        [
+          {
+            "node": "Reviewer Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Agent Output": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reviewer Agent": {
+      "main": [
+        [
+          {
+            "node": "Parse Agent Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Start Time": {
+      "main": [
+        [
+          {
+            "node": "Planner Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Planner Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Executor Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Reviewer Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "9a606069-90fd-4983-9e70-5e6117565778",
+  "meta": {
+    "instanceId": "d5af4e43d7b10a88954f8ba447cccd120789ed6c75ae3983e2c46b8919d5923b"
+  },
+  "id": "jMnP7HrlFSHjOGU4",
+  "tags": [
+    {
+      "updatedAt": "2026-06-03T09:31:55.424Z",
+      "createdAt": "2026-06-03T09:31:55.424Z",
+      "id": "aybwzLIBifEqq4vS",
+      "name": "Evaluation of Agentic AI"
+    }
+  ]
+}
