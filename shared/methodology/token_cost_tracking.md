@@ -1,8 +1,18 @@
 # Token and Cost Tracking Methodology
 
 ## Version
+Current official workflow version: V1.4.4
 
-Current Version: V1.4.3
+Token counts are estimated using approximately four characters per token.
+
+For multi-stage workflows, token estimation includes all LLM calls:
+
+- Planner input and output
+- Executor input and output
+- Reviewer input and output, where applicable
+
+All costs are estimated using provider-specific input and output prices per one million tokens.
+
 
 ## Purpose
 

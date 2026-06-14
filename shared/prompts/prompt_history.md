@@ -1,5 +1,10 @@
 # Prompt History
 
+## Version 1.1
+
+frozen_v1.1
+- Added explicit confidence range instruction (0.0–1.0)
+
 ## Version 1.0
 
 Date: 2026-06-12

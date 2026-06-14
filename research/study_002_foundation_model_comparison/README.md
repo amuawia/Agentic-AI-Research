@@ -78,7 +78,19 @@ manuscript/
 
 ## Status
 
-In Progress
+## Current Status
+
+Pre-collection validation complete.
+
+| Provider         | Model             | Workflow Version | Pilot Status | V1.4.4 Validation |
+|------------------|-------------------|------------------|--------------|-------------------|
+| OpenAI           | GPT-5.5           | V1.4.4           | Complete     | Complete          |
+| Google Gemini    | Gemini 2.5 Pro    | V1.4.4           | Complete     | Complete          |
+| Anthropic Claude | Claude Sonnet 4.6 | V1.4.4           | Complete     | Complete          |
+
+Official data collection will use Workflow Version V1.4.4 and Prompt Version frozen_v1.
+
+
 
 ### Provider Pilot Status
 

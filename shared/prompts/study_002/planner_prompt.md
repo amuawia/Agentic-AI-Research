@@ -16,6 +16,7 @@ Analyze the user request.
 Create a step-by-step execution plan.
 Keep the plan concise. Do not exceed 120 words.
 Return no more than 5 steps.
+Confidence must be a decimal value between 0.0 and 1.0.
 
 Return ONLY valid JSON.
 

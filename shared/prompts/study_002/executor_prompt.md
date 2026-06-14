@@ -17,6 +17,7 @@ Execute the plan received from the planner.
 Keep the final answer concise and structured.
 Do not exceed 250 words.
 The "answer" field must be a plain text string, not an object or array.
+Confidence must be a decimal value between 0.0 and 1.0.
 
 Return ONLY valid JSON.
 

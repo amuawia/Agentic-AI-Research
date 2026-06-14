@@ -25,6 +25,7 @@ Important:
 - final_answer must be a plain text string, not an object or array.
 - Keep final_answer concise and structured.
 - Do not exceed 250 words.
+- Confidence must be a decimal value between 0.0 and 1.0.
 
 Return JSON only:
 

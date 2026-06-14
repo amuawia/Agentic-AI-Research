@@ -14,7 +14,7 @@ Statistical Analysis Plan Version: 1.0
 
 Status: Frozen Prior to Official Data Collection
 
-Effective Workflow Version: V1.4.3
+Effective Workflow Version: V1.4.4
 
 Prompt Version: frozen_v1
 

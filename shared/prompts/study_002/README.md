@@ -24,9 +24,16 @@ Workflow Architectures:
 
 ## Prompt Set Information
 
-Prompt Set Version: 1.0
+Prompt Set Version: 1.1
+
+frozen_v1.1
+- Added explicit confidence range instruction (0.0–1.0)
 
 Status: Frozen
+
+Prompt Set Version: 1.0
+
+Status: unused
 
 Effective Date: 2026-06-12
 

@@ -48,7 +48,16 @@ Evaluate the performance of three workflow architectures across enterprise AI ta
 
 **Status**
 
-In Progress
+Study 002 is currently ready for official data collection.
+
+Current frozen configuration:
+
+- Workflow Version: V1.4.4
+- Prompt Version: frozen_v1
+- Dataset Version: task_bank_v1
+- Providers: OpenAI, Google Gemini, Anthropic Claude
+- Workflows: Basic Agent, Planner–Executor, Planner–Executor–Reviewer
+- Expected Official Runs: 270
 
 **Objective**
 

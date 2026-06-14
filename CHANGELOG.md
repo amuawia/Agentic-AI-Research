@@ -1,3 +1,17 @@
+## V1.4.4 - Official Pre-Collection Freeze - 2026-06-14
+
+- Added markdown fence cleanup across all provider workflows.
+- Added confidence normalization to constrain values to 0.0–1.0.
+- Added quality score normalization to constrain values to 0.0–1.0.
+- Added explicit prompt instruction requiring confidence as a decimal value between 0.0 and 1.0.
+- Standardized Provider and Model metadata across OpenAI, Gemini, and Claude workflows.
+- Updated active workflows for OpenAI, Gemini, and Claude to V1.4.4.
+- Deprecated V1.4.3 workflows.
+- Added provider model registry.
+- Completed V1.4.4 validation runs for all three Planner–Executor–Reviewer workflows.
+- Approved V1.4.4 as the official workflow version for Study 002 official data collection.
+
+
 ## V1.4.3 - 2026-06-13
 
 ### Changed
