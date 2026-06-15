@@ -78,7 +78,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "run_id": "={{ Date.now() }}",
-            "experiment_id": "pilot_claude_v002",
+            "experiment_id": "main_claude_v002",
             "task_id": "={{ $json.task_id }}",
             "workflow_type": "basic_agent",
             "workflow_version": "={{ $json.workflow_version }}",
@@ -112,7 +112,7 @@
             "api_status": "={{ $json.api_status }}",
             "error_message": "={{ $json.error_message }}",
             "retry_count": "={{ $json.retry_count }}",
-            "notes": "pilot_claude_v002_basic_agent",
+            "notes": "main_claude_v002_basic_agent",
             "reviewer_version": "V1.4.4"
           },
           "matchingColumns": [
@@ -636,7 +636,7 @@
     "executionOrder": "v1",
     "availableInMCP": false
   },
-  "versionId": "fe318537-9615-4544-b3b5-e0a6343fca67",
+  "versionId": "8076082e-3f40-4194-b370-c7c9ee0e7b0e",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "d5af4e43d7b10a88954f8ba447cccd120789ed6c75ae3983e2c46b8919d5923b"

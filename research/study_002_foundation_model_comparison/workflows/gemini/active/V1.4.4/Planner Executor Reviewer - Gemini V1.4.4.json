@@ -127,7 +127,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "run_id": "={{ $('Set Start Time').item.json.start_ms }}",
-            "experiment_id": "pilot_gemini_v002",
+            "experiment_id": "main_gemini_v002",
             "task_id": "={{ $json.task_id }}",
             "workflow_type": "planner_executor_reviewer",
             "workflow_version": "={{ $json.workflow_version }}",
@@ -161,7 +161,7 @@
             "api_status": "={{ $json.api_status }}",
             "error_message": "={{ $json.error_message }}",
             "retry_count": "={{ $json.retry_count }}",
-            "notes": "pilot_gemini_v002_planner_executor_reviewer",
+            "notes": "main_gemini_v002_planner_executor_reviewer",
             "reviewer_version": "V1.4.4"
           },
           "matchingColumns": [
@@ -747,7 +747,7 @@
     "executionOrder": "v1",
     "availableInMCP": false
   },
-  "versionId": "1f0f7adc-911d-4252-97fd-0f758b2a006e",
+  "versionId": "0f9a7597-7924-4f16-9d91-bd2cdc586558",
   "meta": {
     "instanceId": "d5af4e43d7b10a88954f8ba447cccd120789ed6c75ae3983e2c46b8919d5923b"
   },

@@ -121,7 +121,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "run_id": "={{ Date.now() }}",
-            "experiment_id": "pilot_openai_v002",
+            "experiment_id": "main_openai_v002",
             "task_id": "={{ $json.task_id }}",
             "workflow_type": "basic_agent",
             "workflow_version": "={{ $json.workflow_version }}",
@@ -155,7 +155,7 @@
             "api_status": "={{ $json.api_status }}",
             "error_message": "={{ $json.error_message }}",
             "retry_count": "={{ $json.retry_count }}",
-            "notes": "pilot_openai_v002_basic_agent",
+            "notes": "main_openai_v002_basic_agent",
             "reviewer_version": "V1.4.4"
           },
           "matchingColumns": [
@@ -637,7 +637,7 @@
     "executionOrder": "v1",
     "availableInMCP": false
   },
-  "versionId": "b1a10959-2cb0-4af8-86c4-266d1137215b",
+  "versionId": "f235d02f-2025-432d-8b89-a2e55c78475e",
   "meta": {
     "instanceId": "d5af4e43d7b10a88954f8ba447cccd120789ed6c75ae3983e2c46b8919d5923b"
   },

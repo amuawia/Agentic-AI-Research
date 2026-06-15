@@ -78,7 +78,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "run_id": "={{ Date.now() }}",
-            "experiment_id": "pilot_gemini_v002",
+            "experiment_id": "main_gemini_v002",
             "task_id": "={{ $json.task_id }}",
             "workflow_type": "basic_agent",
             "workflow_version": "={{ $json.workflow_version }}",
@@ -112,7 +112,7 @@
             "api_status": "={{ $json.api_status }}",
             "error_message": "={{ $json.error_message }}",
             "retry_count": "={{ $json.retry_count }}",
-            "notes": "pilot_gemini_v002_basic_agent",
+            "notes": "main_gemini_v002_basic_agent",
             "reviewer_version": "V1.4.4"
           },
           "matchingColumns": [
@@ -631,7 +631,7 @@
     "executionOrder": "v1",
     "availableInMCP": false
   },
-  "versionId": "f4b3ae39-0825-4536-9621-a418abf0baf7",
+  "versionId": "4e883861-b4ef-45e3-94d0-b59ee36520de",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "d5af4e43d7b10a88954f8ba447cccd120789ed6c75ae3983e2c46b8919d5923b"

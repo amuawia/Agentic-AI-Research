@@ -78,42 +78,59 @@ manuscript/
 
 ## Status
 
-## Current Status
-
 Pre-collection validation complete.
 
-| Provider         | Model             | Workflow Version | Pilot Status | V1.4.4 Validation |
-|------------------|-------------------|------------------|--------------|-------------------|
-| OpenAI           | GPT-5.5           | V1.4.4           | Complete     | Complete          |
-| Google Gemini    | Gemini 2.5 Pro    | V1.4.4           | Complete     | Complete          |
-| Anthropic Claude | Claude Sonnet 4.6 | V1.4.4           | Complete     | Complete          |
+| Provider         | Model             | Workflow Version | Prompt Version | Pilot Status | V1.4.4 Validation |
+| ---------------- | ----------------- | ---------------- | -------------- | ------------ | ----------------- |
+| OpenAI           | GPT-5.5           | V1.4.4           | frozen_v1.1    | Complete     | Complete          |
+| Google Gemini    | Gemini 2.5 Pro    | V1.4.4           | frozen_v1.1    | Complete     | Complete          |
+| Anthropic Claude | Claude Sonnet 4.6 | V1.4.4           | frozen_v1.1    | Complete     | Complete          |
 
-Official data collection will use Workflow Version V1.4.4 and Prompt Version frozen_v1.
+## Current Phase
 
+Study 002 is ready for official data collection.
 
+Official data collection will use:
 
-### Provider Pilot Status
+* Workflow Version: V1.4.4
+* Prompt Version: frozen_v1.1
+* Dataset Version: task_bank_v1
+* Providers: OpenAI, Google Gemini, Anthropic Claude
+* Workflow Types: Basic Agent, Planner–Executor, Planner–Executor–Reviewer
+* Expected Official Runs: 270
 
-| Provider         | Model             | Workflow Version | Pilot Status |
-| ---------------- | ----------------- | ---------------- | ------------ |
-| OpenAI           | GPT-5.5           | V1.4.3           | Complete     |
-| Google Gemini    | Gemini 2.5 Pro    | V1.4.3           | Complete     |
-| Anthropic Claude | Claude Sonnet 4.6 | V1.4.3           | Pending      |
+## Official Run Identifiers
 
-### Current Phase
+Official data collection workflows use the `main_*` identifier prefix.
 
-Completed:
+Examples:
 
-* OpenAI Pilot Validation
-* Gemini Pilot Validation
+* main_openai_v002
+* main_gemini_v002
+* main_claude_v002
+* main_openai_v002_basic_agent
+* main_openai_v002_planner_executor
+* main_openai_v002_planner_executor_reviewer
 
-Next:
+Pilot identifiers remain archived for validation records only.
 
-* Claude Workflow Validation
-* Claude Pilot Execution
-* Cross-Provider Schema Verification
+## Prompt Governance
 
-Official data collection will begin only after all provider pilots have been successfully validated.
+Prompt Version: frozen_v1.1
+
+The prompt set is frozen for official data collection.
+
+The update from frozen_v1 to frozen_v1.1 added an explicit instruction requiring confidence values to be reported as decimals between 0.0 and 1.0.
+
+No prompt changes are allowed after official data collection begins unless a new prompt version is created and documented.
+
+## Workflow Governance
+
+Official workflow version for Study 002 data collection: V1.4.4
+
+V1.4.4 must be used consistently for OpenAI, Gemini, and Claude workflows.
+
+Earlier workflow versions are retained for archival validation only and must not be mixed with official V1.4.4 analysis.
 
 
 ## Planned Publication
