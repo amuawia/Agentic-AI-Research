@@ -48,28 +48,113 @@ Evaluate the performance of three workflow architectures across enterprise AI ta
 
 **Status**
 
-Study 002 is currently ready for official data collection.
+Main data collection completed.
 
-Current frozen configuration:
+Current project phase:
 
-- Workflow Version: V1.4.4
-- Prompt Version: frozen_v1
-- Dataset Version: task_bank_v1
-- Providers: OpenAI, Google Gemini, Anthropic Claude
-- Workflows: Basic Agent, Planner–Executor, Planner–Executor–Reviewer
-- Expected Official Runs: 270
+* Statistical analysis in progress
+* Dataset frozen for analysis
+* Official collection completed: 270 runs
+
+**Official Collection Configuration**
+
+* Workflow Version: V1.4.4
+* Prompt Version: frozen_v1.1
+* Dataset Version: task_bank_v1
+* Providers: OpenAI, Google Gemini, Anthropic Claude
+* Workflows:
+
+  * Basic Agent
+  * Planner–Executor
+  * Planner–Executor–Reviewer
+* Total Official Runs: 270
+
+**Dataset Summary**
+
+| Provider         | Model             | Runs | Status   |
+| ---------------- | ----------------- | ---- | -------- |
+| OpenAI           | GPT-5.5           | 90   | Complete |
+| Google Gemini    | Gemini 2.5 Pro    | 90   | Complete |
+| Anthropic Claude | Claude Sonnet 4.6 | 90   | Complete |
+
+**Dataset Artifacts**
+
+* OpenAI Dataset: 90 runs
+* Gemini Dataset: 90 runs
+* Claude Dataset: 90 runs
+* Merged Dataset: 270 runs
+* AnalysisReady Dataset: Available
 
 **Objective**
 
-Extend the original study by comparing workflow architectures across multiple foundation model providers:
+Extend the original Study 001 by comparing workflow architectures across multiple foundation model providers using a controlled experimental design.
+
+Providers evaluated:
 
 * Google Gemini
 * OpenAI GPT
 * Anthropic Claude
 
-The study maintains a consistent workflow design and task set to enable controlled cross-provider evaluation.
+The study maintains a consistent workflow architecture, prompt set, task bank, evaluation framework, and workflow implementation across providers to enable controlled cross-provider comparison.
 
-Target publication venues include peer-reviewed conferences and journals in artificial intelligence, software engineering, and enterprise systems.
+**Research Questions**
+
+* RQ1: How does workflow architecture affect task performance?
+* RQ2: How do different foundation model providers perform under identical workflow architectures?
+* RQ3: What are the trade-offs between quality, confidence, latency, token consumption, and cost?
+* RQ4: Does the Planner–Executor–Reviewer architecture consistently improve answer quality compared to simpler architectures?
+
+**Experimental Design**
+
+* Providers: 3
+* Workflow Architectures: 3
+* Tasks: 30
+* Total Runs: 270
+
+Task categories:
+
+* Knowledge
+* Reasoning
+* Coding
+
+Difficulty levels:
+
+* Easy
+* Medium
+* Hard
+
+**Current Activities**
+
+* Descriptive statistics
+* Provider comparison analysis
+* Workflow comparison analysis
+* Statistical hypothesis testing
+* Figure and table generation
+* Manuscript preparation
+
+**Reliability Notes**
+
+During collection, a small number of transient provider/API failures occurred and were documented in the project retry log.
+
+One Claude Basic Agent run produced valid task content but failed JSON schema compliance after repeated execution attempts. The event was documented and retained for reproducibility purposes.
+
+**Planned Publication**
+
+Target venues include:
+
+* IEEE conferences
+* Peer-reviewed AI engineering journals
+* Agentic AI systems research venues
+* Enterprise AI and software engineering conferences
+
+**Related Study**
+
+Study 001:
+
+*Evaluating Multi-Agent Workflow Architectures for Enterprise AI Tasks: A Comparative Study Using Gemini and n8n*
+
+DOI: 10.5281/zenodo.20606084
+
 
 ---
 
