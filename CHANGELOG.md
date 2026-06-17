@@ -8,6 +8,23 @@ The format is inspired by Keep a Changelog and adapted for academic research pro
 
 ## [Unreleased]
 
+## Study 002 - Descriptive Statistics and Working Analysis Setup
+
+### Added
+
+- Dataset validation report for the Study 002 AnalysisReady dataset.
+- Descriptive statistics workbook with overall, provider-level, workflow-level, task-level, and reliability summaries.
+- Statistical outputs directory for finalized analysis results.
+- Working analysis directory containing the statistical workbook for pivot tables and intermediate calculations.
+
+### Updated
+
+- Study 002 README with current analysis status and next steps.
+
+### Git Tag
+
+- study002-descriptive-statistics-complete
+
 ### Planned
 
 * Conduct official Study 002 data collection.
