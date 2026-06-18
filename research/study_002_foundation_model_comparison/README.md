@@ -162,9 +162,9 @@ manuscript/
 
 ## Current Status
 
-The Study 002 data collection phase is complete. The AnalysisReady dataset has been validated, descriptive statistics have been generated, reliability metrics have been documented, and formal assumption testing has been completed.
+The Study 002 data collection phase is complete. The AnalysisReady dataset has been validated, descriptive statistics have been generated, reliability metrics have been documented, formal assumption testing has been completed, and Two-Way ANOVA has been successfully executed.
 
-Current phase: Two-Way ANOVA and inferential statistical analysis.
+Current phase: Effect Size Analysis and Publication-Ready Results Generation.
 
 ### Completed
 
@@ -175,17 +175,23 @@ Current phase: Two-Way ANOVA and inferential statistical analysis.
 * Statistical working workbook created
 * Descriptive assumption assessment completed
 * Formal assumption testing completed
+* Two-Way ANOVA completed
 
-### Assumption Testing Summary
+### ANOVA Summary
 
-Formal assumption testing was conducted for the primary outcome (`quality_score`) and secondary outcome (`confidence`). Shapiro-Wilk tests indicated departures from normality, and Levene’s tests indicated variance heterogeneity. Because the experimental design is balanced with equal cell sizes (n = 30 per provider × workflow group), Two-Way ANOVA was retained as the primary inferential analysis method, with results to be interpreted alongside effect sizes and post-hoc comparisons.
+Two-Way ANOVA was conducted for both `quality_score` and `confidence` using a balanced 3 × 3 factorial design.
+
+For `quality_score`, significant effects were observed for Provider, Workflow Architecture, and the Provider × Workflow interaction.
+
+For `confidence`, significant effects were observed for Provider and Workflow Architecture, while the Provider × Workflow interaction was not statistically significant.
 
 ### Next Steps
 
-* Conduct Two-Way ANOVA for provider, workflow, and provider × workflow effects
-* Conduct post-hoc comparisons where applicable
-* Calculate effect sizes
-* Generate figures and publication-ready tables
+* Calculate and document effect sizes
+* Review and summarize post-hoc comparisons
+* Generate publication-ready figures
+* Generate publication-ready tables
+* Draft the Results section
 * Prepare the Study 002 manuscript
 
 

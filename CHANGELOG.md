@@ -8,22 +8,22 @@ The format is inspired by Keep a Changelog and adapted for academic research pro
 
 ## [Unreleased]
 
-## [Unreleased]
-
 ### Added
 
-* Completed descriptive and formal assumption testing for Study 002.
-* Added Shapiro-Wilk normality testing for `quality_score` and `confidence`.
-* Added Levene’s homogeneity of variance testing for `quality_score` and `confidence`.
-* Documented the statistical decision to retain Two-Way ANOVA as the primary inferential method due to the balanced 3 × 3 factorial design with equal cell sizes.
+* Completed Two-Way ANOVA for Study 002.
+* Added Provider, Workflow, and Provider × Workflow significance testing for `quality_score`.
+* Added Provider, Workflow, and Provider × Workflow significance testing for `confidence`.
+* Added post-hoc comparison analysis.
+* Added partial eta squared effect size estimates within ANOVA outputs.
 
 ### Updated
 
-* Updated Study 002 documentation to reflect transition from assumption testing to Two-Way ANOVA and inferential statistical analysis.
+* Updated Study 002 status from assumption testing to effect size analysis and publication-ready result generation.
 
 ### Current Phase
 
-* Two-Way ANOVA and inferential statistical analysis.
+* Effect size analysis and publication-ready result generation.
+
 
 
 

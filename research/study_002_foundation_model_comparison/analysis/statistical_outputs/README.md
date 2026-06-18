@@ -9,7 +9,7 @@ This directory contains finalized statistical output files for Study 002.
 | dataset_validation_report.xlsx| Complete | Dataset validation report for the AnalysisReady dataset. |
 | descriptive_statistics.xlsx   | Complete | Descriptive statistics by provider, workflow, provider × workflow, task category, difficulty, and reliability metrics. |
 | assumption_tests.xlsx         | Complete | Descriptive and formal assumption testing results, including Shapiro-Wilk normality tests and Levene’s homogeneity of variance tests. |
-| anova_results.xlsx            | Pending  | Inferential statistics results for provider, workflow, and provider × workflow effects. |
+| anova_results.xlsx            | Complete  | Inferential statistics results for provider, workflow, and provider × workflow effects. |
 | effect_sizes.xlsx             | Pending  | Effect size estimates for statistical comparisons. |
 
 ## Source Dataset
