@@ -9,8 +9,8 @@ This directory contains finalized statistical output files for Study 002.
 | dataset_validation_report.xlsx| Complete | Dataset validation report for the AnalysisReady dataset. |
 | descriptive_statistics.xlsx   | Complete | Descriptive statistics by provider, workflow, provider × workflow, task category, difficulty, and reliability metrics. |
 | assumption_tests.xlsx         | Complete | Descriptive and formal assumption testing results, including Shapiro-Wilk normality tests and Levene’s homogeneity of variance tests. |
-| anova_results.xlsx            | Complete  | Inferential statistics results for provider, workflow, and provider × workflow effects. |
-| effect_sizes.xlsx             | Pending  | Effect size estimates for statistical comparisons. |
+| anova_results.xlsx            | Complete | Inferential statistics results for provider, workflow, and provider × workflow effects. |
+| effect_sizes.xlsx             | Complete | Partial eta squared effect size analysis and interpretation for all ANOVA effects. |
 
 ## Source Dataset
 
@@ -25,4 +25,4 @@ The files in this directory represent finalized outputs used for reporting. Inte
 
 Study 002 assumption testing has been completed. Descriptive assessment and formal assumption tests were conducted for the primary outcome (`quality_score`) and secondary outcome (`confidence`). Shapiro-Wilk tests indicated departures from normality, and Levene’s tests indicated variance heterogeneity. Because the experimental design is balanced with equal cell sizes (n = 30 per provider × workflow group), Two-Way ANOVA was retained as the primary inferential analysis method, with results to be interpreted alongside effect sizes and post-hoc comparisons.
 
-Current phase: Two-Way ANOVA and inferential statistical analysis.
+Current phase: Effect size analysis completed. Preparing publication-ready figures, tables, and manuscript results.

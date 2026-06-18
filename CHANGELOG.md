@@ -10,6 +10,21 @@ The format is inspired by Keep a Changelog and adapted for academic research pro
 
 ### Added
 
+* Completed effect size analysis for Study 002.
+* Added partial eta squared interpretation tables for `quality_score` and `confidence`.
+* Documented effect size magnitude classifications (Small, Medium, Large).
+
+### Updated
+
+* Updated Study 002 status from ANOVA analysis to publication-ready result generation.
+
+### Current Phase
+
+* Publication-ready figures, tables, and manuscript preparation.
+
+
+### Added
+
 * Completed Two-Way ANOVA for Study 002.
 * Added Provider, Workflow, and Provider × Workflow significance testing for `quality_score`.
 * Added Provider, Workflow, and Provider × Workflow significance testing for `confidence`.

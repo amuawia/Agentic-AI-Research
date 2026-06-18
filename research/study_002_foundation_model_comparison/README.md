@@ -164,7 +164,7 @@ manuscript/
 
 The Study 002 data collection phase is complete. The AnalysisReady dataset has been validated, descriptive statistics have been generated, reliability metrics have been documented, formal assumption testing has been completed, and Two-Way ANOVA has been successfully executed.
 
-Current phase: Effect Size Analysis and Publication-Ready Results Generation.
+Current phase: Publication-Ready Results Generation.
 
 ### Completed
 
@@ -176,6 +176,7 @@ Current phase: Effect Size Analysis and Publication-Ready Results Generation.
 * Descriptive assumption assessment completed
 * Formal assumption testing completed
 * Two-Way ANOVA completed
+* Calculate and document effect sizes
 
 ### ANOVA Summary
 
@@ -187,7 +188,6 @@ For `confidence`, significant effects were observed for Provider and Workflow Ar
 
 ### Next Steps
 
-* Calculate and document effect sizes
 * Review and summarize post-hoc comparisons
 * Generate publication-ready figures
 * Generate publication-ready tables
@@ -258,3 +258,11 @@ Target venues include:
 Evaluating Multi-Agent Workflow Architectures for Enterprise AI Tasks: A Comparative Study Using Gemini and n8n
 
 DOI: 10.5281/zenodo.20606084
+
+
+Research Artifact Availability
+
+All workflows, prompts, datasets, and analysis artifacts used in this study are publicly available in the project repository.
+
+Repository:
+https://github.com/amuawia/Agentic-AI-Research
