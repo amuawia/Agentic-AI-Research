@@ -8,6 +8,25 @@ The format is inspired by Keep a Changelog and adapted for academic research pro
 
 ## [Unreleased]
 
+## [Unreleased]
+
+### Added
+
+* Completed descriptive and formal assumption testing for Study 002.
+* Added Shapiro-Wilk normality testing for `quality_score` and `confidence`.
+* Added Levene’s homogeneity of variance testing for `quality_score` and `confidence`.
+* Documented the statistical decision to retain Two-Way ANOVA as the primary inferential method due to the balanced 3 × 3 factorial design with equal cell sizes.
+
+### Updated
+
+* Updated Study 002 documentation to reflect transition from assumption testing to Two-Way ANOVA and inferential statistical analysis.
+
+### Current Phase
+
+* Two-Way ANOVA and inferential statistical analysis.
+
+
+
 ## Study 002 - Descriptive Statistics and Working Analysis Setup
 
 ### Added

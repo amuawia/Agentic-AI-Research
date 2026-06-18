@@ -162,36 +162,32 @@ manuscript/
 
 ## Current Status
 
-The Study 002 data collection phase is complete. The dataset has been validated, descriptive statistics have been generated, and reliability metrics have been documented.
+The Study 002 data collection phase is complete. The AnalysisReady dataset has been validated, descriptive statistics have been generated, reliability metrics have been documented, and formal assumption testing has been completed.
 
-Current phase: Assumption Testing and Inferential Statistical Analysis.
+Current phase: Two-Way ANOVA and inferential statistical analysis.
 
 ### Completed
 
-- Data collection completed
-- Dataset validation completed
-- Descriptive statistics completed
-- Reliability metrics completed
-- Statistical working workbook created
+* Data collection completed
+* Dataset validation completed
+* Descriptive statistics completed
+* Reliability metrics completed
+* Statistical working workbook created
+* Descriptive assumption assessment completed
+* Formal assumption testing completed
+
+### Assumption Testing Summary
+
+Formal assumption testing was conducted for the primary outcome (`quality_score`) and secondary outcome (`confidence`). Shapiro-Wilk tests indicated departures from normality, and Levene’s tests indicated variance heterogeneity. Because the experimental design is balanced with equal cell sizes (n = 30 per provider × workflow group), Two-Way ANOVA was retained as the primary inferential analysis method, with results to be interpreted alongside effect sizes and post-hoc comparisons.
 
 ### Next Steps
 
-- Conduct normality testing
-- Conduct homogeneity of variance testing
-- Determine whether parametric or non-parametric inferential tests are appropriate
-- Run provider × workflow inferential analysis
-- Calculate effect sizes
+* Conduct Two-Way ANOVA for provider, workflow, and provider × workflow effects
+* Conduct post-hoc comparisons where applicable
+* Calculate effect sizes
+* Generate figures and publication-ready tables
+* Prepare the Study 002 manuscript
 
-Dataset collection has been completed.
-
-Current work focuses on:
-
-* Descriptive Statistics
-* Provider Comparison
-* Workflow Comparison
-* Inferential Statistical Testing
-* Figure Generation
-* Manuscript Preparation
 
 ## Workflow Governance
 
