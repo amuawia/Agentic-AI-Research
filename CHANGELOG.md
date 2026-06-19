@@ -8,6 +8,22 @@ The format is inspired by Keep a Changelog and adapted for academic research pro
 
 ## [Unreleased]
 
+
+## Study 002 - Publication Assets Completed
+
+### Added
+- Publication-ready descriptive statistics tables.
+- Publication-ready ANOVA tables.
+- Publication-ready effect size table.
+- Publication-ready operational metrics table.
+- Five publication figures with Mean ± SD error bars.
+
+### Completed
+- Assumption testing (Shapiro-Wilk and Levene's tests).
+- Two-way ANOVA analyses.
+- Partial eta squared effect size calculations.
+- Publication tables and figures generation.
+
 ### Added
 
 * Completed effect size analysis for Study 002.
@@ -20,7 +36,7 @@ The format is inspired by Keep a Changelog and adapted for academic research pro
 
 ### Current Phase
 
-* Publication-ready figures, tables, and manuscript preparation.
+* Write Results Section.
 
 
 ### Added
