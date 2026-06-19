@@ -1,51 +1,89 @@
 # 7. Discussion
 
-The objective of Study 002 was to evaluate the relative impact of foundation model provider and workflow architecture on task performance under controlled experimental conditions. By maintaining identical task sets, prompts, workflow logic, and evaluation criteria across providers, the study isolated the effects of provider selection and workflow design on quality, confidence, and operational performance.
+The objective of Study 002 was to evaluate the relative influence of foundation model provider and workflow architecture on performance under controlled experimental conditions. By maintaining identical tasks, prompts, workflow logic, and evaluation procedures across providers, the study isolated the effects of provider selection and workflow design on answer quality, confidence, and operational efficiency.
+
+The results demonstrate that both provider selection and workflow architecture contribute to performance variation. However, their influence differs depending on the outcome measure being considered. Workflow architecture exhibited a stronger association with quality outcomes, whereas provider selection exerted a stronger influence on confidence. Furthermore, workflow effectiveness was not uniform across providers, highlighting the importance of considering workflow design and foundation model selection jointly rather than as independent factors.
 
 ## 7.1 Workflow Architecture Influenced Quality More Than Provider Selection
 
-One of the most notable findings of this study is that workflow architecture exerted a stronger influence on quality score than provider selection. The effect size associated with workflow architecture (partial η² = 0.099) exceeded that of provider selection (partial η² = 0.024), suggesting that the structure through which a model is guided may be more important than the specific foundation model itself for achieving higher-quality outcomes.
+One of the most important findings of the study is that workflow architecture had a larger effect on quality score than provider selection. The observed effect size for workflow architecture exceeded that of provider selection, suggesting that the manner in which a model is guided through a task can be more influential than the underlying model provider itself.
 
-This result extends the findings of Study 001, which demonstrated performance differences among Basic Agent, Planner–Executor, and Planner–Executor–Reviewer architectures using a single provider. By replicating the workflow comparison across three major foundation model providers, Study 002 provides additional evidence that workflow design is a critical factor in agentic system performance.
+This finding aligns with the broader motivation behind agentic AI systems. Rather than relying exclusively on improvements in foundation model capability, agentic workflows seek to improve outcomes through structured reasoning, planning, decomposition, verification, and review. The results of the present study suggest that such workflow-level interventions can produce measurable quality improvements even when the underlying foundation model remains unchanged.
 
-A possible explanation is that planning and task decomposition reduce the cognitive burden associated with solving complex tasks in a single generation step. Structured workflows may encourage more systematic reasoning, improve task coverage, and reduce omissions relative to single-agent approaches. However, the results also indicate that workflow complexity alone does not guarantee improved performance under all conditions.
+A plausible explanation is that workflow architectures reduce the complexity of solving a task within a single generation step. Planning stages may encourage more systematic task decomposition, while execution and review stages may reduce omissions and improve consistency. Consequently, workflow architecture can be viewed as an additional optimization layer that operates independently of the foundation model itself.
+
+The findings therefore suggest that organizations seeking quality improvements should consider workflow engineering as a primary design variable rather than focusing exclusively on model selection.
 
 ## 7.2 Workflow Effectiveness Was Provider-Dependent
 
-The significant Provider × Workflow interaction observed for quality score represents one of the most important findings of the study. Although workflow architecture generally influenced quality, the magnitude and direction of workflow effects varied across providers.
+Although workflow architecture generally influenced quality, the significant Provider × Workflow interaction demonstrates that workflow effectiveness varied across providers.
 
-This finding suggests that workflow architectures should not be assumed to transfer uniformly between foundation models. A workflow that produces substantial gains with one provider may produce smaller gains, negligible gains, or even performance degradation with another provider. The observed interaction highlights the importance of jointly evaluating workflow architecture and foundation model selection rather than treating them as independent design decisions.
+This result is particularly important because many workflow studies evaluate a single foundation model and implicitly assume that observed workflow benefits will generalize to alternative providers. The present findings suggest that such assumptions may not always hold. Identical workflow architectures produced different performance patterns when paired with different foundation models.
 
-From a practical perspective, organizations adopting agentic systems may benefit from workflow-specific benchmarking rather than assuming that a workflow validated on one model will produce equivalent outcomes on alternative providers. The results therefore support a co-design perspective in which workflow architecture and foundation model capabilities are evaluated together.
+Several explanations may account for this behavior. Foundation models differ in training data, instruction-following characteristics, reasoning capabilities, context utilization strategies, and response generation mechanisms. These differences may influence how effectively a model responds to planning, decomposition, or review stages embedded within a workflow.
+
+From a practical perspective, the results indicate that workflow selection should not be separated from model selection. Organizations evaluating agentic systems may benefit from benchmarking complete workflow-provider combinations rather than independently optimizing workflows and models. A workflow that performs well with one provider cannot automatically be assumed to provide equivalent benefits when deployed with another.
+
+The observed interaction effect therefore supports a co-design perspective in which workflow architecture and foundation model capabilities are treated as interdependent components of an agentic system.
 
 ## 7.3 Confidence and Quality Represent Distinct Dimensions of Performance
 
-The analyses revealed different patterns for quality and confidence. While workflow architecture demonstrated the strongest effect on quality, provider selection exerted the strongest influence on confidence.
+The analyses revealed an important distinction between confidence and quality outcomes. While workflow architecture exhibited the strongest influence on quality score, provider selection demonstrated the strongest influence on confidence.
 
-This divergence suggests that confidence and quality should not be treated as interchangeable measures of system performance. Models that express higher confidence do not necessarily achieve the highest objective quality scores, and improvements in workflow architecture may affect answer quality more strongly than self-reported confidence.
+This divergence suggests that confidence should not be interpreted as a direct substitute for objective performance. Models may express high confidence despite producing lower-quality outputs, while workflow modifications may improve answer quality without producing equivalent changes in confidence.
 
-The finding has methodological implications for future evaluations of agentic systems. Studies that rely heavily on confidence measures may overlook important differences in objective task performance. Consequently, confidence should be interpreted as a complementary metric rather than a direct proxy for answer quality.
+The finding has methodological implications for future evaluations of agentic systems. Studies that rely heavily on confidence measures may overlook meaningful differences in actual task performance. Confidence can provide useful information regarding model behavior and self-assessment, but it should be interpreted alongside objective evaluation metrics rather than as a standalone indicator of effectiveness.
+
+More broadly, the results reinforce the importance of multi-dimensional evaluation frameworks. Agentic systems should be assessed using multiple performance indicators because no single metric fully captures system effectiveness.
 
 ## 7.4 Performance Improvements Incur Operational Costs
 
-A consistent trend across all providers was the increase in operational resource consumption associated with more sophisticated workflow architectures. Cost, execution duration, and token consumption increased systematically as workflows progressed from Basic Agent to Planner–Executor and subsequently to Planner–Executor–Reviewer configurations.
+The study also demonstrated a consistent relationship between workflow complexity and operational resource consumption. Across all providers, increases in workflow sophistication were associated with higher monetary cost, longer execution duration, and greater token consumption.
 
-These results illustrate a fundamental trade-off in agentic system design. More complex workflows often provide quality improvements, but such improvements require additional computational resources and longer execution times. The Planner–Executor–Reviewer architecture was particularly resource intensive, consuming substantially more tokens than the Basic Agent configuration while also increasing latency and monetary cost.
+This finding highlights a fundamental trade-off in agentic system design. More sophisticated workflows frequently improve performance, but such improvements are not obtained without additional computational expense. The Planner–Executor–Reviewer architecture produced the highest resource requirements across multiple operational metrics, reflecting the cost of incorporating planning and review stages into the execution process.
 
-For production deployments, these trade-offs may be as important as quality improvements themselves. Organizations operating under budget, latency, or throughput constraints may determine that smaller quality gains do not justify substantially higher operational costs. Consequently, workflow selection should be informed by both effectiveness and efficiency considerations.
+For enterprise deployments, these trade-offs may be as important as quality improvements themselves. Organizations often operate under budgetary, latency, throughput, or infrastructure constraints. In such environments, the most effective workflow may not necessarily be the workflow that achieves the highest quality score. Instead, decision makers may need to balance quality improvements against increases in cost and execution time.
 
-## 7.5 Implications for Agentic AI Research
+The findings therefore support the use of efficiency-aware evaluation frameworks that consider both performance and operational requirements when comparing agentic architectures.
 
-The findings contribute to the growing body of research examining agentic workflows and multi-stage reasoning systems. Rather than focusing exclusively on model scaling or provider selection, the results indicate that workflow design represents an independent source of performance variation that can meaningfully influence outcomes.
+## 7.5 Comparison with Study 001
 
-The study also demonstrates the value of controlled cross-provider evaluations. Much of the existing literature evaluates workflow architectures using a single foundation model, making it difficult to determine whether reported benefits generalize across providers. By applying identical workflows to multiple leading foundation models, the present study provides evidence that workflow effects are real but provider-dependent.
+Study 002 extends the findings of Study 001, which evaluated the same workflow architectures using a single foundation model provider. The earlier study demonstrated that workflow design influences performance and that multi-stage workflows can outperform simpler agent configurations under certain conditions.
 
-These findings support future research examining how specific workflow components, such as planning, reflection, verification, or review mechanisms, interact with model characteristics. Understanding these interactions may be critical for developing more effective and resource-efficient agentic systems.
+The present study expands this investigation by introducing multiple foundation model providers while preserving workflow structure, task selection, prompt design, and evaluation methodology. This controlled extension enables direct examination of whether workflow effects persist across providers.
 
-## 7.6 Scope of Interpretation
+The results indicate that workflow architecture remains an important determinant of performance across providers. However, the significant interaction effect observed in Study 002 reveals an additional layer of complexity that was not observable within a single-provider design. Specifically, workflow effectiveness depends partly on the characteristics of the underlying foundation model.
 
-The conclusions of this study should be interpreted within the boundaries of the experimental design. The findings are based on three foundation model providers, three workflow architectures, and a benchmark consisting of 30 enterprise-oriented tasks executed under Workflow Version V1.4.4 and Prompt Version frozen_v1.1.
+Consequently, Study 002 not only replicates the general importance of workflow architecture observed in Study 001 but also demonstrates that workflow benefits are conditional rather than universally transferable.
 
-Accordingly, the results should not be interpreted as establishing universally optimal workflows or providers. Provider capabilities, pricing structures, model implementations, and API behavior may evolve over time. Furthermore, alternative task domains, workflow designs, or evaluation methodologies may produce different outcomes.
+## 7.6 Implications for Enterprise AI Deployment
 
-Within the evaluated experimental setting, however, the results provide consistent evidence that workflow architecture is a major determinant of answer quality, that workflow effectiveness varies across providers, and that performance gains are accompanied by measurable operational trade-offs.
+The findings have several practical implications for organizations adopting agentic AI systems.
+
+First, workflow architecture should be considered a strategic design decision rather than merely an implementation detail. The results indicate that workflow modifications can influence quality outcomes to a degree that exceeds the influence of provider selection alone.
+
+Second, provider evaluation should be conducted within the context of the intended workflow architecture. Benchmarking foundation models in isolation may not accurately reflect production performance when models are embedded within multi-stage workflows.
+
+Third, operational considerations should be incorporated into deployment decisions. In some applications, modest quality improvements may justify substantial increases in computational cost. In others, latency and cost constraints may favor simpler architectures despite lower performance.
+
+Finally, the findings suggest that organizations may benefit from systematic experimentation before large-scale deployment. Because workflow effectiveness varies across providers, empirical validation remains essential for identifying appropriate workflow-provider combinations.
+
+## 7.7 Future Research Directions
+
+Several opportunities for future research emerge from the present study.
+
+First, future investigations could evaluate additional workflow architectures beyond the three examined here. Reflection-based workflows, tool-augmented agents, retrieval-enhanced systems, and collaborative multi-agent configurations may exhibit different performance characteristics and operational trade-offs.
+
+Second, future studies could examine a broader range of foundation model providers and model variants. As commercial and open-source models continue to evolve, understanding how workflow effects interact with model capabilities will remain an important research question.
+
+Third, additional work is needed to explore domain-specific performance. Although the present benchmark included Knowledge, Reasoning, and Coding tasks, alternative domains such as healthcare, finance, scientific research, or legal analysis may exhibit different workflow requirements.
+
+Finally, future research could investigate optimization strategies that improve quality while minimizing resource consumption. Such approaches may be particularly valuable for enterprise environments in which operational efficiency is a critical consideration.
+
+## 7.8 Scope of Interpretation
+
+The conclusions of this study should be interpreted within the boundaries of the experimental design. The findings are derived from three foundation model providers, three workflow architectures, and a benchmark consisting of 30 enterprise-oriented tasks executed using Workflow Version V1.4.4 and Prompt Version frozen_v1.1.
+
+Accordingly, the results should not be interpreted as identifying universally optimal providers or workflows. Provider capabilities, pricing models, inference systems, and API behavior may change over time. Alternative task sets, workflow designs, evaluation criteria, or deployment contexts may also produce different outcomes.
+
+Within the evaluated experimental setting, however, the evidence consistently indicates that workflow architecture is a major determinant of answer quality, that workflow effectiveness varies across providers, and that performance gains are accompanied by measurable operational trade-offs.
