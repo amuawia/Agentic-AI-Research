@@ -1,0 +1,17 @@
+# 9. Conclusion
+
+This study investigated the relative influence of foundation model provider and workflow architecture on the performance of agentic AI systems under controlled experimental conditions. Building upon the findings of Study 001, the research extended the evaluation to three leading foundation model providers while maintaining identical workflow logic, prompts, benchmark tasks, and evaluation procedures.
+
+Using a fully crossed experimental design comprising 270 official runs, the study compared OpenAI GPT-5.5, Google Gemini 2.5 Pro, and Anthropic Claude Sonnet 4.6 across three workflow architectures: Basic Agent, Planner–Executor, and Planner–Executor–Reviewer. Performance was evaluated using quality score, confidence, cost, execution duration, and token consumption.
+
+The results demonstrated that workflow architecture exerted a stronger influence on quality outcomes than provider selection alone. At the same time, provider selection exhibited a stronger association with confidence than workflow architecture. A significant Provider × Workflow interaction was observed for quality score, indicating that workflow effectiveness depended partly on the characteristics of the underlying foundation model. This finding suggests that workflow architecture and model selection should not be treated as independent design decisions.
+
+The study also identified substantial operational trade-offs associated with increasing workflow complexity. More sophisticated workflows generally required higher costs, longer execution durations, and greater token consumption. Although these workflows frequently improved performance, the corresponding increases in resource requirements highlight the importance of considering efficiency alongside effectiveness when evaluating agentic systems.
+
+From a research perspective, the findings contribute to the growing literature on agentic AI by providing a controlled cross-provider comparison of workflow architectures. The results extend prior single-provider observations by demonstrating that workflow effects persist across providers while also revealing that workflow benefits are not uniformly transferable between foundation models.
+
+From a practical perspective, the findings suggest that organizations should evaluate complete workflow-provider combinations rather than focusing exclusively on model selection. Workflow engineering represents a meaningful source of performance variation and may provide improvements comparable to, or greater than, those obtained through provider changes alone.
+
+The conclusions should be interpreted within the scope of the evaluated experimental configuration, including the selected providers, workflow architectures, benchmark tasks, and workflow implementation version. Future research should investigate additional workflow designs, broader model ecosystems, domain-specific benchmarks, and strategies for improving performance while minimizing operational cost.
+
+Overall, the results indicate that workflow architecture is a major determinant of agentic AI performance, that workflow effectiveness varies across foundation model providers, and that meaningful quality improvements are accompanied by measurable operational trade-offs. These findings highlight the importance of jointly considering workflow design, provider selection, and resource efficiency when developing and evaluating agentic AI systems.
