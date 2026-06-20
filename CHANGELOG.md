@@ -9,7 +9,33 @@ The format is inspired by Keep a Changelog and adapted for academic research pro
 ## [Unreleased]
 
 
+## [Unreleased]
+
+### Added
+
+* Draft Introduction section.
+* Draft Methodology section.
+* Draft Experimental Design section.
+* Draft Statistical Analysis section.
+* Draft Results section.
+* Draft Discussion section.
+* Draft Threats to Validity section.
+* Draft Reproducibility Package section.
+* Draft Conclusion section.
+* Related Work literature map.
+* Related Work reference inventory.
+
+### Documentation
+
+* Expanded manuscript drafting structure.
+* Added literature planning assets for journal manuscript development.
+
+
+
+
 ## Study 002 - Publication Assets Completed
+
+
 
 ### Added
 - Publication-ready descriptive statistics tables.
