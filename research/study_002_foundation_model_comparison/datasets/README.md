@@ -27,6 +27,12 @@ task_bank_v1.csv
 
 The same task bank must be used for all providers and workflow architectures.
 
+### Task Bank Design Rationale
+
+`task_bank_v1.csv` contains 30 official benchmark tasks. The initial task-bank design was selected during the Study 001 planning discussion with ChatGPT and used a balanced category structure: 10 Knowledge tasks, 10 Reasoning tasks, and 10 Coding tasks. This 30-task scale was accepted as a practical balance between task diversity and manageable experimental complexity.
+
+Task difficulty labels were added later as an additional annotation layer. Difficulty was therefore not the original balancing criterion, and the final difficulty distribution is not perfectly uniform. Category balance, rather than difficulty balance, was the primary task-bank design constraint.
+
 ---
 
 ## pilot

@@ -77,7 +77,7 @@ The benchmark was organized into three task categories:
 * Reasoning
 * Coding
 
-These categories were selected to represent common forms of enterprise AI work while providing diversity in cognitive and technical requirements.
+The initial task-bank structure was selected during the Study 001 planning process using ChatGPT-assisted research design discussion. The accepted design used 30 tasks, balanced as 10 Knowledge tasks, 10 Reasoning tasks, and 10 Coding tasks. These categories were selected to represent common forms of enterprise AI work while providing diversity in cognitive and technical requirements.
 
 Tasks were sourced from task_bank_v1 and remained unchanged throughout the study. The use of a frozen benchmark ensured that all providers and workflows were evaluated against identical task requirements.
 
@@ -197,6 +197,6 @@ Three foundation model providers were selected to represent leading contemporary
 
 Three workflow architectures were selected because they represent increasing levels of agentic complexity while remaining directly comparable. The Basic Agent workflow provides a baseline condition, Planner–Executor introduces structured task decomposition, and Planner–Executor–Reviewer incorporates an additional review mechanism intended to improve output quality.
 
-The benchmark consisted of 30 tasks distributed across Knowledge, Reasoning, and Coding categories. This scale was selected to provide meaningful task diversity while maintaining manageable experimental complexity. The resulting design generated 270 official executions, providing sufficient observations to support statistical comparison of providers, workflows, and interaction effects.
+The benchmark consisted of 30 tasks distributed across Knowledge, Reasoning, and Coding categories. This scale was selected to provide meaningful task diversity while maintaining manageable experimental complexity. The primary task-bank balance was category-based, with 10 tasks assigned to each of the three categories. Difficulty labels were added later as a secondary annotation layer and were not used as the primary balancing criterion. The resulting design generated 270 official executions, providing sufficient observations to support statistical comparison of providers, workflows, and interaction effects.
 
 Collectively, these design decisions produced a controlled experimental framework capable of evaluating both performance outcomes and operational trade-offs across a representative set of contemporary agentic AI configurations.
