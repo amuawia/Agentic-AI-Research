@@ -13,6 +13,8 @@ This directory contains finalized statistical output files for Study 002.
 | effect_sizes.xlsx             | Complete | Partial eta squared effect size analysis and interpretation for all ANOVA effects. |
 | measurement_validity_audit.xlsx | Complete | Audit of the relationship between `quality_score` and `confidence` across workflow/provider configurations. |
 | robustness_sensitivity.xlsx | Complete | Robust descriptive sensitivity checks, including median/IQR summaries, bootstrap confidence intervals, IQR outlier sensitivity, reviewer vs non-reviewer comparison, and simple mean-difference contrasts. |
+| operational_efficiency.xlsx | Complete | Operational-efficiency summaries, including quality proxy per dollar, per 1k tokens, and per second, plus cost/latency/token multipliers and provider × workflow rankings. |
+| task_stratified_analysis.xlsx | Complete | Task-stratified descriptive analysis by category, secondary difficulty annotation, category × workflow, difficulty × workflow, and per-task summaries. |
 
 ## Source Dataset
 
@@ -36,3 +38,9 @@ The measurement-validity audit documents how `quality_score` relates to `confide
 This distinction is important because Basic Agent and Planner–Executor workflows do not include an independent reviewer stage. In the V1.4.4 workflow parsing logic, `quality_score` falls back to `confidence` when no parsed `quality_score` is emitted by the workflow output. In contrast, Planner–Executor–Reviewer workflows include a reviewer stage that emits a review-derived `quality_score`, allowing `quality_score` and `confidence` to diverge.
 
 The audit supports cautious interpretation of `quality_score` as an operational quality proxy rather than an independent human judgment of answer quality.
+
+## Task-Stratified Analysis
+
+The task-stratified workbook summarizes Study 002 results by the original task-bank categories and by the later difficulty annotations. The task bank was designed around category balance: 10 Knowledge tasks, 10 Reasoning tasks, and 10 Coding tasks. Difficulty labels are reported as a secondary annotation layer and should not be interpreted as the primary balancing criterion.
+
+The workbook includes overview checks, task-bank balance summaries, category and difficulty summaries, workflow interaction summaries, and per-task descriptive results. These outputs support transparent reporting of whether observed provider/workflow patterns are consistent across task categories while avoiding overclaims about difficulty-balanced experimental design.
