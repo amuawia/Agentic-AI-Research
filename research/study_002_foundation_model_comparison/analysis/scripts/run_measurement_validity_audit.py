@@ -11,6 +11,13 @@ Outputs:
 
 The audit supports the manuscript's public-safe framing of quality_score as an
 operational quality proxy rather than an independent human judgment.
+
+Workflow context:
+  - Basic Agent and Planner-Executor workflows do not include an independent
+    reviewer stage. In V1.4.4 workflow parsing logic, quality_score falls back
+    to confidence when no parsed quality_score is emitted.
+  - Planner-Executor-Reviewer workflows include a reviewer stage that emits a
+    review-derived quality_score, so quality_score and confidence can diverge.
 """
 
 from __future__ import annotations
@@ -199,6 +206,8 @@ def build_overview(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         {"Item": "Quality differs from confidence count", "Value": distinct_count},
         {"Item": "Quality differs from confidence percent", "Value": pct(distinct_count, total)},
         {"Item": "Purpose", "Value": "Audit whether the operational quality proxy is independent from confidence across Study 002 configurations."},
+        {"Item": "Workflow design note", "Value": "Basic Agent and Planner-Executor have no reviewer stage; their V1.4.4 parsing logic uses confidence as the quality_score fallback when no parsed quality_score is emitted."},
+        {"Item": "Reviewer workflow note", "Value": "Planner-Executor-Reviewer includes a reviewer stage that emits a review-derived quality_score, allowing quality_score and confidence to diverge."},
         {"Item": "Interpretation note", "Value": "High equality rates indicate confidence-aligned operational scoring rather than independent human quality judgment."},
     ]
 
