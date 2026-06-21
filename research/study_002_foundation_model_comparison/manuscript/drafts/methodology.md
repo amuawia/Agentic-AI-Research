@@ -1,125 +1,119 @@
 # 3. Methodology
 
-## 3.1 Research Objective
+## 3.1 Study Objective and Positioning
 
-The objective of this study was to evaluate the relative influence of foundation model provider and workflow architecture on the performance of agentic AI systems. Specifically, the study sought to determine whether differences in answer quality, confidence, and operational performance were primarily attributable to the underlying foundation model or to the workflow architecture through which the model was deployed.
+The objective of Study 002 is to evaluate how foundation model provider and agentic workflow architecture are associated with operational outcomes in controlled AI workflow execution. The study is positioned as an exploratory operational benchmark rather than a definitive human-rated assessment of answer quality. Its purpose is to provide reproducible system-level evidence about provider × workflow configurations, including quality-proxy behavior, confidence, cost, duration, token consumption, and workflow complexity.
 
-The study extends previous work that examined workflow architectures using a single foundation model provider. By introducing multiple providers while preserving workflow structure, prompts, tasks, and evaluation procedures, the present research isolates the effects of provider selection and workflow design under controlled conditions.
+The study extends an earlier single-provider workflow comparison by introducing multiple foundation model providers while preserving the same task bank, prompt version, workflow definitions, and execution protocol. This design enables the analysis to distinguish provider-associated effects, workflow-associated effects, and provider × workflow interactions under a common experimental framework.
 
-## 3.2 Experimental Approach
+## 3.2 Experimental Design
 
-A controlled experimental methodology was adopted to enable direct comparison of workflow architectures across multiple foundation model providers.
+The study used a balanced 3 × 3 factorial design. The two primary experimental factors were:
 
-The experimental design was based on the principle of isolating independent variables while maintaining all other conditions constant. Workflow logic, prompt templates, task definitions, execution procedures, and evaluation criteria were standardized across providers. This approach reduced potential confounding factors and improved comparability between experimental conditions.
+- **Foundation model provider:** OpenAI, Google, and Anthropic.
+- **Workflow architecture:** Basic Agent, Planner–Executor, and Planner–Executor–Reviewer.
 
-The study employed a comparative evaluation framework in which multiple workflow architectures were executed against a common benchmark task set. Performance outcomes were subsequently analyzed using quantitative statistical methods.
+Each provider × workflow condition was evaluated on the same 30-task benchmark, producing 270 official runs. The design is balanced at the provider × workflow level, with 30 runs per cell. All runs used Workflow Version V1.4.4 and Prompt Version `frozen_v1.1`.
 
-## 3.3 Agentic Workflow Architectures
+The controlled design was intended to reduce confounding from changing prompts, task definitions, workflow logic, or execution procedures. Consequently, observed differences are interpreted as associations with provider selection, workflow architecture, or their interaction within this experimental setting.
+
+## 3.3 Benchmark Task Bank
+
+The benchmark task bank consisted of 30 enterprise-oriented tasks. The accepted task-bank design was balanced across three primary task categories:
+
+- 10 Knowledge tasks,
+- 10 Reasoning tasks,
+- 10 Coding tasks.
+
+This category-balanced design was selected to cover different types of enterprise AI work while keeping the experiment operationally feasible. Difficulty labels were added later as a secondary annotation layer and were not used as the primary balancing criterion. Therefore, task-difficulty summaries are reported as exploratory stratified analyses rather than as evidence from a difficulty-balanced design.
+
+Each task was executed under every provider × workflow condition. This ensured that provider and workflow comparisons were based on identical task requirements.
+
+## 3.4 Agentic Workflow Architectures
 
 Three workflow architectures were evaluated.
 
-### Basic Agent
+### 3.4.1 Basic Agent
 
-The Basic Agent architecture represents a single-agent execution model in which a task is presented directly to a foundation model and a response is generated without explicit planning or review stages.
+The Basic Agent architecture represents direct single-stage execution. The task is submitted to the foundation model, and the model produces a response without an explicit planning or review stage. This architecture serves as the baseline workflow condition.
 
-This architecture serves as the baseline condition against which more sophisticated workflows are compared.
+### 3.4.2 Planner–Executor
 
-### Planner–Executor
+The Planner–Executor architecture separates planning from response generation. A planning stage first produces a structured approach to the task. The execution stage then uses this plan to generate the final response. This workflow is intended to support task decomposition and more organized answer generation.
 
-The Planner–Executor architecture separates planning and execution into distinct stages. An initial planning step generates a structured approach for solving the task. The resulting plan is then executed to produce the final response.
+### 3.4.3 Planner–Executor–Reviewer
 
-This workflow is intended to encourage decomposition of complex problems into smaller and more manageable components.
+The Planner–Executor–Reviewer architecture adds a review stage after planning and execution. The reviewer stage evaluates the generated output and can identify omissions, inconsistencies, or possible improvements. The final output is then produced after this review process. This architecture increases workflow complexity and typically requires additional model calls, duration, tokens, and cost.
 
-### Planner–Executor–Reviewer
+## 3.5 Foundation Model Providers
 
-The Planner–Executor–Reviewer architecture extends the previous workflow by introducing an additional review stage. After execution, a reviewer component evaluates the generated output and provides feedback intended to identify omissions, inconsistencies, or potential improvements.
+The study evaluated three commercially available foundation model providers:
 
-The final response is produced after incorporating the review process into the workflow.
+- OpenAI GPT-5.5,
+- Google Gemini 2.5 Pro,
+- Anthropic Claude Sonnet 4.6.
 
-All workflow architectures were implemented using Workflow Version V1.4.4 and remained unchanged throughout official data collection.
+These providers were selected because they represent widely used contemporary foundation model ecosystems and are relevant to enterprise AI deployment. The study does not claim universal provider superiority. Instead, provider findings are interpreted as time-bounded observations for the specific model versions, prompts, workflows, and task bank evaluated.
 
-## 3.4 Foundation Model Providers
+## 3.6 Outcome Variables and Operational Metrics
 
-The study evaluated three commercially available foundation model providers representing leading contemporary large language model ecosystems.
+The study measured both effectiveness-oriented and operational-efficiency outcomes.
 
-The evaluated providers were:
+The primary effectiveness-oriented variable was:
 
-* OpenAI GPT-5.5
-* Google Gemini 2.5 Pro
-* Anthropic Claude Sonnet 4.6
+- **Operational quality proxy (`quality_score`)**.
 
-Provider selection was motivated by their widespread adoption, advanced reasoning capabilities, and relevance to current enterprise AI deployments.
+The secondary effectiveness-oriented variable was:
 
-To improve comparability, identical task inputs, workflow structures, and prompt templates were applied across providers whenever technically feasible.
-
-## 3.5 Evaluation Framework
-
-System performance was evaluated using both effectiveness and operational metrics.
-
-Effectiveness metrics included:
-
-* Quality score
-* Confidence score
-
-Quality score served as the primary performance measure and was used to assess task completion effectiveness across experimental conditions.
-
-Confidence score captured model-reported confidence and was analyzed separately from objective quality measures.
+- **Model-reported confidence (`confidence`)**.
 
 Operational metrics included:
 
-* Cost (USD)
-* Execution duration (seconds)
-* Total token consumption
+- estimated cost in USD,
+- execution duration in seconds,
+- total token consumption,
+- model call count.
 
-These metrics were included to quantify the resource implications associated with increasingly sophisticated workflow architectures.
+These operational metrics were included because workflow architecture can improve or degrade practical deployment value depending on cost, latency, and token requirements. For enterprise AI systems, a workflow with higher observed quality may still be less attractive if it requires substantially more time, tokens, or cost.
 
-The use of both effectiveness and efficiency metrics enabled evaluation of performance trade-offs rather than focusing exclusively on output quality.
+## 3.7 Operational Quality Proxy and Measurement Validity
 
-## 3.6 Data Collection Procedure
+The variable `quality_score` is interpreted as an operational workflow-generated quality proxy rather than as an independent human judgment of answer quality. This distinction is central to the methodology.
 
-Data collection was performed using a standardized execution protocol.
+In the Basic Agent and Planner–Executor workflows, no independent reviewer stage was present. When no explicit `quality_score` was emitted by those workflows, the parser used model-reported confidence as the operational quality proxy. In the Planner–Executor–Reviewer workflow, the reviewer stage could emit a review-derived `quality_score`, allowing quality and confidence to diverge.
 
-All benchmark tasks were executed under controlled workflow conditions using frozen prompt templates and fixed workflow definitions. Prompt Version frozen_v1.1 and Workflow Version V1.4.4 were maintained throughout the study to prevent procedural drift.
+To make this measurement issue transparent, the study includes a measurement-validity audit. The audit reports the extent to which `quality_score` equals `confidence` across workflows, providers, and provider × workflow cells. The audit showed that quality and confidence were identical for all observations in Basic Agent and Planner–Executor workflows, while they were mostly distinct in the Planner–Executor–Reviewer workflow. Therefore, quality-related results are interpreted cautiously as operational proxy evidence, not as human-perceived answer quality.
 
-Execution results were recorded in structured datasets that captured task metadata, workflow identifiers, provider information, evaluation outcomes, operational metrics, and execution logs.
+## 3.8 Data Collection Procedure
 
-Operational anomalies were documented during data collection. Retry events and execution issues were recorded separately to preserve transparency and facilitate later analysis. No final execution failures were included in the analysis dataset.
+Data collection followed a standardized execution protocol. All benchmark tasks were executed using frozen prompt templates, fixed workflow definitions, common task inputs, and structured output capture. Execution results recorded task metadata, provider and model identifiers, workflow type, prompt version, workflow version, output text, confidence, operational quality proxy, duration, token usage, estimated cost, model call count, status fields, and notes.
 
-Upon completion of data collection, provider-specific datasets were merged into a unified analysis-ready dataset. Dataset validation procedures were subsequently performed to verify completeness, consistency, and readiness for statistical analysis.
+Provider-specific execution outputs were merged into a unified analysis-ready dataset. Dataset validation was performed to verify completeness, balance across provider × workflow conditions, consistency of key fields, and absence of missing values in primary analysis variables. The final analysis-ready dataset contained 270 successful runs.
 
-The resulting dataset formed the basis for all descriptive statistics, assumption testing, analysis of variance procedures, effect size estimation, and publication assets reported in this study.
+## 3.9 Statistical and Analytical Procedures
 
-## 3.7 Reproducibility Strategy
+The analysis pipeline combined inferential, descriptive, robustness, and operational-efficiency analyses.
 
-Reproducibility was a primary design consideration throughout the study. To support transparent evaluation and facilitate future replication efforts, all major experimental components were version controlled and frozen during official data collection.
+First, descriptive statistics summarized outcomes by provider, workflow, and provider × workflow condition. Second, two-way ANOVA was used to estimate provider, workflow, and provider × workflow effects for the operational quality proxy and confidence. Effect sizes were reported using partial eta squared. Third, assumption testing was conducted, and results were interpreted alongside robustness and sensitivity checks because the primary outcome did not fully satisfy all parametric assumptions.
 
-Workflow definitions were maintained under Workflow Version V1.4.4, while prompt templates were preserved under Prompt Version frozen_v1.1. Benchmark tasks were sourced from a fixed task bank (task_bank_v1), ensuring that all providers were evaluated against identical task requirements. These controls were intended to minimize procedural drift and prevent unintentional changes to the experimental configuration during execution.
+Additional analyses were added to strengthen journal readiness without collecting new data:
 
-In addition to preserving workflow and prompt versions, the study maintained structured datasets, execution logs, analysis scripts, statistical outputs, publication tables, and publication figures within a version-controlled research repository. Intermediate processing steps were documented to enable traceability from raw execution outputs to final analytical results.
+- **Measurement-validity audit:** quantified the relationship between `quality_score` and `confidence`.
+- **Robustness and sensitivity analysis:** reported medians, interquartile ranges, bootstrap confidence intervals, trimmed means, outlier sensitivity, reviewer vs non-reviewer comparisons, and simple contrasts.
+- **Task-stratified analysis:** summarized results by Knowledge, Reasoning, and Coding categories, and by secondary difficulty annotations.
+- **Operational-efficiency analysis:** calculated quality proxy per dollar, per 1,000 tokens, and per second, plus cost, latency, and token multipliers.
+- **Publication figures and tables:** generated reproducible visual and tabular outputs for manuscript preparation.
 
-The analysis pipeline was also preserved through dedicated statistical scripts covering assumption testing, analysis of variance procedures, and effect size estimation. This approach reduces dependence on manual calculations and improves transparency regarding the generation of reported results.
+These analyses support a cautious interpretation of observed provider/workflow patterns while improving transparency about measurement scope, robustness, and practical deployment trade-offs.
 
-Although exact replication of commercial foundation model behavior cannot be guaranteed due to provider-side system evolution, the study design provides a reproducible record of the evaluated workflows, prompts, tasks, datasets, and analytical procedures.
+## 3.10 Reproducibility Strategy
 
-## 3.8 Workflow Standardization
+Reproducibility was treated as a core design requirement. The study preserved the task bank, prompt version, workflow version, analysis-ready dataset, statistical scripts, generated workbooks, publication tables, and publication figures in a version-controlled research repository.
 
-A central methodological objective of the study was to isolate the effects of provider selection and workflow architecture while minimizing alternative sources of variation.
+The reproducibility package includes scripts for dataset validation, descriptive statistics, assumption testing, ANOVA, effect size estimation, measurement-validity auditing, robustness and sensitivity analysis, operational-efficiency analysis, task-stratified analysis, and publication figure/table generation. This enables readers and reviewers to trace reported results from the analysis-ready dataset to final outputs.
 
-To achieve this objective, workflow logic was standardized across all providers. Each provider was evaluated using the same workflow structures, identical task definitions, common prompt templates, and equivalent execution procedures. The benchmark task set, evaluation criteria, and data collection process were likewise held constant throughout the study.
+Exact behavioral replication of commercial foundation models cannot be guaranteed because model providers may update deployed systems over time. However, preserving the evaluated prompts, workflow definitions, task bank, model identifiers, datasets, and analysis scripts provides a reproducible record of the experimental configuration and analytical process used in this study.
 
-This standardization strategy was intended to reduce confounding influences that frequently complicate comparisons across foundation models. In many practical evaluations, differences in prompts, task formulations, implementation details, or execution environments make it difficult to determine whether observed performance differences arise from the models themselves or from surrounding experimental conditions.
+## 3.11 Scope of Inference
 
-By maintaining a consistent workflow implementation and evaluation framework across providers, the study increases confidence that observed differences are primarily associated with the experimental variables under investigation rather than uncontrolled procedural variation.
-
-Consequently, the study should be interpreted as a controlled comparison of workflow-provider combinations operating under a common experimental framework.
-
-## 3.9 Study Positioning
-
-The present study forms the second phase of a broader research program examining the performance of agentic workflow architectures.
-
-Study 001 evaluated Basic Agent, Planner–Executor, and Planner–Executor–Reviewer workflows using a single foundation model provider. That study established that workflow architecture can influence performance across Knowledge, Reasoning, and Coding tasks and demonstrated measurable differences between workflow designs.
-
-Building upon those findings, Study 002 extends the investigation through a controlled cross-provider evaluation. Rather than introducing new workflow architectures, the study preserves the workflow structures established in the earlier work and examines their behavior across multiple foundation model providers. This design enables direct assessment of whether workflow effects observed in a single-provider setting remain observable when the underlying model provider changes.
-
-The resulting methodology combines replication and extension. It replicates the core workflow comparison established in Study 001 while extending the experimental scope to include OpenAI GPT-5.5, Google Gemini 2.5 Pro, and Anthropic Claude Sonnet 4.6. This approach strengthens the evidence base regarding workflow effectiveness and provides insight into how workflow architecture and provider selection interact within contemporary agentic AI systems.
-
+The study's findings apply to the evaluated provider versions, workflow definitions, prompt version, task bank, and execution period. The results should not be interpreted as permanent rankings of foundation model providers or as evidence that one workflow architecture is universally superior across settings. Instead, the study provides controlled operational evidence that workflow architecture and provider selection can interact, and that operational efficiency must be considered alongside quality-proxy and confidence outcomes when designing agentic AI systems.
