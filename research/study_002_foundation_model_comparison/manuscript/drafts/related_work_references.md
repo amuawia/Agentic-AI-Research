@@ -12,7 +12,23 @@ Before final submission, each entry should be checked for:
 * final venue
 * publisher formatting
 * BibTeX accuracy
-* citation style required by the target journal
+* citation style required by the selected venue
+
+---
+
+# Core Citation Set Used in the Revised Related Work
+
+The rewritten Related Work section emphasizes the following citation groups:
+
+- Foundation-model evaluation and benchmarking: HELM, MMLU, BIG-bench, SWE-bench, AgentBench.
+- Evaluation validity and judging: MT-Bench, Chatbot Arena, AlpacaEval / evaluator-debiasing work.
+- Agentic systems and workflow architecture: autonomous-agent surveys, augmented language models, Toolformer, Generative Agents.
+- Multi-stage reasoning and review: Chain-of-Thought, self-consistency, ReAct, Tree of Thoughts, Reflexion, Self-Refine, and critical self-correction surveys.
+- Cross-provider context: GPT, Gemini, and Claude technical/model reports, interpreted cautiously as time-bounded background rather than ranking evidence.
+- Operational efficiency: transformer inference efficiency, efficient LLM surveys, and compute/resource-cost literature.
+- Study-specific continuity: Study 001 as the single-provider predecessor and Study 002 as the controlled cross-provider extension.
+
+This citation set supports the paper's public-safe positioning as a controlled exploratory operational benchmark rather than a permanent provider ranking or definitive human-quality assessment.
 
 ---
 
