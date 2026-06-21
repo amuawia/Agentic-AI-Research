@@ -1,55 +1,47 @@
 # 8. Threats to Validity
 
-As with any empirical evaluation of AI systems, the findings of this study should be interpreted in light of several validity considerations. The experimental design incorporated multiple controls intended to improve reproducibility and reduce bias, including frozen prompts, fixed workflow definitions, a standardized task bank, and identical evaluation procedures across providers. Nevertheless, certain limitations remain and should be considered when interpreting the results.
+This study used a controlled and reproducible experimental design, including frozen prompts, fixed workflow definitions, a common task bank, and balanced provider × workflow execution. Nevertheless, the findings should be interpreted within several validity boundaries.
 
 ## 8.1 Internal Validity
 
-Internal validity concerns whether the observed outcomes can reasonably be attributed to the experimental factors under investigation rather than to uncontrolled influences.
+Internal validity concerns whether observed differences can reasonably be attributed to the experimental factors rather than uncontrolled variation. The study strengthened internal validity by holding task definitions, prompt version, workflow version, execution procedure, and primary analysis pipeline constant across providers. Each provider × workflow cell contained 30 observations, producing a balanced design for the main experimental factors.
 
-Several measures were implemented to strengthen internal validity. All providers were evaluated using the same benchmark tasks, workflow architectures, prompt templates, execution procedures, and evaluation criteria. Workflow Version V1.4.4 and Prompt Version frozen_v1.1 were maintained throughout official data collection to minimize procedural variation.
+Some sources of internal variation remain. Commercial foundation model providers operate proprietary inference systems that may include undisclosed routing, load balancing, safety policies, or inference optimizations. These factors may influence outputs independently of the workflow and provider labels available to the researcher. In addition, large language model outputs may vary across repeated executions even with the same prompt and workflow configuration.
 
-Despite these controls, some factors remained outside direct experimental control. Foundation model providers operate proprietary inference systems whose internal configurations are not publicly accessible. Variations in model serving infrastructure, load balancing, system updates, or inference optimization mechanisms may influence outputs independently of the experimental design.
+A small number of operational anomalies were documented during data collection, including retry events and one JSON compliance issue. These events were recorded and managed through the study protocol, and the final analysis-ready dataset contained 270 successful runs. However, such events illustrate that evaluations of commercial foundation model APIs may be affected by transient service behavior.
 
-A small number of operational anomalies were documented during data collection. Google Gemini required four retry events, while Anthropic Claude required one retry event and produced one documented JSON compliance failure. Although these events were recorded and managed according to the study protocol, they illustrate the practical reality that large-scale evaluations of commercial foundation models may be affected by transient API behavior. No final execution failures were retained in the analysis dataset.
+## 8.2 Construct and Measurement Validity
 
-In addition, large language models are inherently stochastic systems. Even under identical prompts and workflow configurations, repeated executions may produce different outputs. While the study design sought to evaluate realistic system behavior rather than eliminate stochasticity entirely, execution variability remains a potential source of unexplained variance.
+Construct validity is the most important limitation of this study. The variable `quality_score` is not interpreted as an independent human judgment of answer quality. It is an operational workflow-generated quality proxy extracted from the workflow execution schema.
 
-## 8.2 Construct Validity
+The measurement-validity audit showed that `quality_score` was identical to confidence for all Basic Agent and Planner–Executor observations. This occurred because those workflows did not include an independent reviewer stage, and the parser used confidence as the quality proxy when no separate quality score was emitted. In the Planner–Executor–Reviewer workflow, quality and confidence were mostly distinct because the reviewer stage could emit a review-derived score.
 
-Construct validity concerns whether the selected metrics accurately represent the concepts that the study intends to measure.
+As a result, quality-related conclusions should be interpreted cautiously. The study provides reproducible operational evidence about workflow-generated metrics, not a definitive assessment of human-perceived answer quality. Confidence also has construct limitations because it represents model-reported self-assessment rather than externally calibrated certainty. Future work should add independent human raters, inter-rater reliability, and a multi-dimensional scoring rubric covering factual accuracy, completeness, reasoning quality, usefulness, and safety.
 
-The primary outcome variables included quality score, confidence, cost, execution duration, and total token consumption. While these measures provide useful perspectives on system performance, they do not capture every aspect of agent effectiveness.
-
-Quality scores represent an operationalized measure of task performance rather than a complete assessment of real-world utility. Alternative evaluation frameworks may emphasize different dimensions, including factual accuracy, robustness, interpretability, maintainability, or user satisfaction. Consequently, the quality metric used in this study should be interpreted as one representation of performance rather than a universal measure of agent effectiveness.
-
-Confidence presents an additional construct validity consideration. Confidence scores reflect model-generated self-assessments rather than externally verified measures of certainty. Prior research has shown that confidence and correctness are not always aligned in large language models. Accordingly, confidence was analyzed as a complementary indicator rather than as a direct substitute for objective task quality.
-
-Similarly, operational metrics such as cost, duration, and token consumption provide important information regarding efficiency but do not capture all deployment considerations. Infrastructure costs, rate limits, availability constraints, and integration complexity may also influence the practical suitability of a workflow architecture.
+Operational metrics also have scope limits. Estimated cost, duration, and token use are important deployment indicators, but they do not capture every practical factor, such as rate limits, integration complexity, infrastructure overhead, availability guarantees, or organizational compliance requirements.
 
 ## 8.3 External Validity
 
-External validity concerns the extent to which the findings can be generalized beyond the specific experimental setting.
+External validity concerns whether the findings generalize beyond the evaluated setting. The study examined three providers, three workflow architectures, one prompt version, one workflow version, and a 30-task enterprise-oriented benchmark. These choices provide useful coverage but do not represent all possible agentic AI systems.
 
-The study evaluated three major foundation model providers, three workflow architectures, and a benchmark consisting of 30 enterprise-oriented tasks. Although these selections provide meaningful coverage of contemporary agentic AI systems, they do not represent the full range of available models, workflows, or application domains.
+The task bank was balanced by category, with 10 Knowledge, 10 Reasoning, and 10 Coding tasks. Difficulty labels were added later as a secondary annotation layer and were not used as the primary balancing criterion. Therefore, difficulty-stratified findings should be interpreted as exploratory rather than as evidence from a difficulty-balanced benchmark.
 
-The findings therefore should not be interpreted as identifying universally optimal providers or workflow architectures. Alternative foundation models, including future commercial releases or open-source systems, may exhibit different performance characteristics. Likewise, workflow architectures that incorporate retrieval augmentation, tool use, reflection mechanisms, memory systems, or collaborative multi-agent coordination may produce different outcomes than the architectures evaluated in this study.
+The results should not be interpreted as permanent provider rankings or universal workflow recommendations. Different task domains, model versions, prompts, tool integrations, retrieval mechanisms, memory systems, or multi-agent coordination patterns may produce different outcomes. Domains such as healthcare, finance, law, cybersecurity, software maintenance, and scientific research may also require different evaluation rubrics and risk controls.
 
-The benchmark itself represents another limitation. While the task bank includes Knowledge, Reasoning, and Coding tasks, it does not encompass all possible enterprise use cases. Domains such as healthcare, finance, legal analysis, scientific discovery, cybersecurity, and multimodal applications may place different demands on agentic systems.
+## 8.4 Statistical Conclusion Validity
 
-Task difficulty distribution was intentionally inherited from the frozen benchmark and was therefore not perfectly balanced. The final dataset contained 63 Easy, 99 Medium, and 108 Hard task executions. Although this imbalance reflects the composition of the benchmark rather than unequal provider allocation, alternative task distributions may influence aggregate performance estimates.
+The balanced factorial design supports comparison across provider and workflow conditions, but statistical conclusions remain bounded by sample size and metric properties. The main design contained 30 tasks repeated across each provider × workflow cell, yielding 270 observations. This is sufficient for an exploratory operational benchmark but does not eliminate uncertainty around subgroup analyses.
 
-Accordingly, the conclusions of this study should be interpreted as applying to the evaluated providers, workflows, task bank, and experimental configuration rather than to all possible agentic AI systems.
+Assumption testing indicated that the data did not fully satisfy all parametric assumptions. For this reason, the study reports effect sizes, robustness and sensitivity analyses, medians, interquartile ranges, bootstrap confidence intervals, outlier checks, reviewer versus non-reviewer comparisons, and task-stratified summaries. These analyses support cautious interpretation but do not replace independent validation using human-rated outcomes.
 
-## 8.4 Reproducibility and Temporal Validity
+The operational-efficiency index is descriptive. It normalizes observed quality-proxy behavior against cost, duration, and token use, but it should not be interpreted as a universal ranking criterion. Different deployment contexts may weight cost, latency, quality, and reliability differently.
 
-A distinctive challenge in foundation model research is the rapidly evolving nature of the underlying systems. Unlike many traditional software platforms, commercial foundation models may change over time through provider-side updates that are not fully transparent to researchers.
+## 8.5 Reproducibility and Temporal Validity
 
-To support reproducibility, the study preserved workflow definitions, prompt templates, task bank versions, dataset files, analysis scripts, statistical outputs, publication tables, and publication figures within a version-controlled repository. Workflow Version V1.4.4, Prompt Version frozen_v1.1, and task_bank_v1 were frozen for official data collection and analysis.
+Reproducibility is challenging in research involving commercial foundation models because providers can update model behavior, pricing, safety layers, inference infrastructure, and API behavior without full public visibility. The study mitigates this by preserving the task bank, prompts, workflow version, model identifiers, analysis-ready dataset, scripts, statistical outputs, publication tables, and figures in a version-controlled repository.
 
-Nevertheless, exact replication may become increasingly difficult as providers introduce new model versions, modify inference systems, update pricing structures, or alter API behavior. Consequently, future replications conducted under nominally identical procedures may not produce identical results.
+Even with these materials, exact behavioral replication may not be possible if providers change the evaluated systems. The findings should therefore be interpreted as a time-bounded record of the evaluated provider × workflow configurations under the study's execution conditions. This limitation is inherent to empirical research on rapidly evolving foundation model systems and motivates repeated benchmark updates over time.
 
-This limitation is not unique to the present study but reflects a broader challenge facing empirical research involving rapidly evolving foundation models. For this reason, the findings should be interpreted as a reproducible evaluation of the evaluated systems at the time of experimentation rather than as immutable estimates of future model performance.
+## 8.6 Summary
 
-## 8.5 Summary
-
-Despite these limitations, the study incorporates several methodological strengths, including a controlled cross-provider design, frozen workflow and prompt configurations, balanced provider and workflow allocations, comprehensive operational metrics, documented execution logs, and transparent statistical analysis procedures. These measures strengthen confidence in the reported findings while also clarifying the boundaries within which the conclusions should be interpreted.
+The study provides controlled operational evidence about agentic AI workflow configurations, but its conclusions are bounded by the use of an operational quality proxy, absence of independent human ratings, the selected task bank, commercial model drift, and the evaluated workflow/provider set. These limitations do not invalidate the benchmark; rather, they define its proper interpretation as a reproducible exploratory study and motivate follow-up work with independent quality assessment and broader workflow coverage.

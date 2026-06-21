@@ -1,59 +1,39 @@
 # 6. Results
 
-## 6.1 Dataset Validation
+## 6.1 Dataset and Analysis Overview
 
-The final Study 002 dataset contained 270 experimental runs generated from a fully crossed design involving three foundation model providers, three workflow architectures, and 30 benchmark tasks. Each provider contributed 90 observations, and each workflow architecture was evaluated across 90 observations, resulting in a balanced design for the primary experimental factors.
+The final Study 002 dataset contained 270 successful experimental runs from a balanced 3 × 3 factorial design: three foundation model providers, three workflow architectures, and 30 benchmark tasks. Each provider × workflow cell contained 30 observations. The task bank contained 10 Knowledge, 10 Reasoning, and 10 Coding tasks. Difficulty labels were available as secondary annotations and were not the primary balancing criterion.
 
-No missing values were identified in the primary outcome variables, including quality score, confidence, cost (USD), execution duration (seconds), and total token consumption. Task metadata were complete for all observations.
+All primary analytical variables were available in the analysis-ready dataset, including the operational quality proxy (`quality_score`), confidence, estimated cost, execution duration, total token consumption, and model call count. The generated publication package includes `publication_tables_v2.xlsx` and four current publication figures in `results/figures_publication/`.
 
-The benchmark consisted of Knowledge, Reasoning, and Coding tasks. Although provider and workflow allocations were balanced, task difficulty distribution reflected the composition of the frozen task bank and was therefore not uniform. The final dataset included 63 Easy, 99 Medium, and 108 Hard task executions.
+## 6.2 RQ1: Workflow Effects on the Operational Quality Proxy
 
-Operational reliability was high throughout data collection. Google Gemini required four documented retry events but produced no final execution failures. Anthropic Claude required one retry event and generated one documented JSON compliance failure. OpenAI GPT-5.5 completed all official runs without recorded retry events or execution failures. All successful executions were retained in the final analysis dataset.
+Workflow architecture was significantly associated with the operational quality proxy, F = 14.329, p < 0.001, partial η² = 0.099. This was the largest main effect observed for quality and is interpreted as a medium effect. Provider selection also had a statistically significant but smaller effect, F = 3.186, p = 0.043, partial η² = 0.024.
 
-## 6.2 Quality Score Analysis
+Across workflows, Planner–Executor achieved the highest mean quality proxy (M = 0.944), followed by Basic Agent (M = 0.905) and Planner–Executor–Reviewer (M = 0.822). Figure 1 (`figure_01_quality_heatmap_provider_workflow.png`) visualizes mean quality by provider × workflow condition. These results indicate that adding a planning stage was associated with stronger operational quality-proxy outcomes in this benchmark, but adding a reviewer stage did not uniformly improve the proxy metric.
 
-A two-way analysis of variance (ANOVA) was conducted to evaluate the effects of foundation model provider and workflow architecture on quality score.
+## 6.3 RQ2: Provider Effects on Confidence and Operational Outcomes
 
-The analysis revealed a statistically significant main effect of provider, F = 3.186, p = 0.043, with a small effect size (partial η² = 0.024). A significant main effect of workflow architecture was also observed, F = 14.329, p < 0.001, with a medium effect size (partial η² = 0.099).
+Provider selection was more strongly associated with confidence than with the operational quality proxy. For confidence, provider had a significant medium effect, F = 12.209, p < 0.001, partial η² = 0.086. Workflow architecture also had a statistically significant but smaller effect on confidence, F = 3.624, p = 0.028, partial η² = 0.027.
 
-Most notably, the Provider × Workflow interaction was statistically significant, F = 4.673, p = 0.001, partial η² = 0.067. This interaction indicates that the relative effectiveness of workflow architectures differed across providers rather than producing uniform performance gains.
+Mean confidence differed across providers, with Google showing the highest mean confidence (M = 0.964), followed by OpenAI (M = 0.942) and Anthropic (M = 0.886). Because confidence is model-reported, these findings should be interpreted as differences in provider self-assessment behavior rather than externally verified correctness.
 
-Figure 1 presents mean quality scores by provider and workflow architecture. Although more complex workflows generally achieved higher quality scores, the magnitude and direction of improvement varied across providers. For example, Google Gemini demonstrated strong performance under the Planner–Executor configuration but exhibited reduced performance under the Planner–Executor–Reviewer workflow relative to expectations based solely on workflow complexity.
+## 6.4 RQ3: Provider × Workflow Interaction
 
-Taken together, these findings suggest that workflow architecture exerted a stronger influence on quality outcomes than provider selection alone. However, the significant interaction effect demonstrates that workflow performance cannot be evaluated independently of the underlying foundation model.
+The provider × workflow interaction was significant for the operational quality proxy, F = 4.673, p = 0.001, partial η² = 0.067. This medium interaction effect indicates that workflow behavior differed across providers. For example, Google achieved a high mean quality proxy under Planner–Executor but a lower mean under Planner–Executor–Reviewer, while OpenAI showed more stable quality-proxy behavior across workflow conditions.
 
-## 6.3 Confidence Analysis
+For confidence, the provider × workflow interaction was not statistically significant, F = 2.022, p = 0.092, partial η² = 0.030. This contrast suggests that workflow-provider interactions were more visible in the operational quality proxy than in confidence.
 
-A second two-way ANOVA was performed to examine confidence scores across providers and workflow architectures.
+## 6.5 Measurement-Validity Audit
 
-Provider selection had a statistically significant effect on confidence, F = 12.209, p < 0.001, with a medium effect size (partial η² = 0.086). Workflow architecture also demonstrated a statistically significant effect, F = 3.624, p = 0.028, although the corresponding effect size was comparatively small (partial η² = 0.027).
+The measurement-validity audit showed that `quality_score` and confidence were identical for all Basic Agent observations and all Planner–Executor observations. In contrast, they were mostly distinct in the Planner–Executor–Reviewer workflow: only 5 of 90 reviewer-workflow observations (5.6%) had identical quality and confidence values.
 
-In contrast to the quality score analysis, the Provider × Workflow interaction was not statistically significant, F = 2.022, p = 0.092, partial η² = 0.030.
+This finding is central to interpretation. For non-reviewer workflows, the operational quality proxy overlaps with confidence when no independent quality score is emitted. For the reviewer workflow, the review stage can produce a distinct score. Therefore, quality-related results in this study should be read as operational workflow-generated proxy evidence, not as independent human-rated answer quality.
 
-Figure 2 illustrates confidence scores across experimental conditions. Confidence levels remained relatively high throughout the study, but systematic differences between providers were evident. The absence of a significant interaction effect suggests that confidence was influenced more consistently by provider characteristics than by provider-specific responses to workflow architecture.
+## 6.6 Robustness, Task-Stratified, and Efficiency Findings
 
-Overall, confidence outcomes appeared to be driven primarily by provider selection, whereas workflow architecture played a comparatively smaller role.
+Robustness outputs supported cautious interpretation of the main descriptive pattern. Median quality was 0.950 for Basic Agent, 0.950 for Planner–Executor, and 0.880 for Planner–Executor–Reviewer. Bootstrap and outlier-sensitivity outputs were generated to document stability without treating them as replacements for independent validation.
 
-## 6.4 Effect Size Summary
+Task-stratified analysis showed category-level variation. Mean quality proxy was highest for Knowledge tasks (M = 0.919), followed by Reasoning tasks (M = 0.900) and Coding tasks (M = 0.853). Figure 2 (`figure_02_quality_by_task_category.png`) summarizes these category-level results. Difficulty summaries are exploratory because difficulty was a secondary annotation layer rather than a balancing criterion.
 
-Effect size estimates provide additional insight into the relative importance of the experimental factors.
-
-For quality score, workflow architecture produced the largest observed main effect (partial η² = 0.099), exceeding the effect associated with provider selection (partial η² = 0.024). The Provider × Workflow interaction also demonstrated a meaningful effect size (partial η² = 0.067), indicating that workflow effectiveness varied substantially across providers.
-
-For confidence, provider selection produced the strongest effect (partial η² = 0.086), while workflow architecture contributed a smaller effect (partial η² = 0.027). The interaction effect remained comparatively small and did not achieve statistical significance.
-
-These findings suggest that answer quality and model confidence were influenced by different underlying factors. Workflow architecture was more strongly associated with quality outcomes, whereas provider choice was more strongly associated with confidence outcomes.
-
-Complete effect size estimates are reported in Table 4.
-
-## 6.5 Operational Performance Metrics
-
-Operational performance was evaluated using monetary cost, execution duration, and total token consumption.
-
-Across all providers, increasing workflow complexity was consistently associated with increased resource requirements. As illustrated in Figure 3, mean execution cost increased progressively from Basic Agent to Planner–Executor and from Planner–Executor to Planner–Executor–Reviewer configurations.
-
-A similar pattern was observed for execution duration (Figure 4). More complex workflows required substantially longer processing times because additional planning, execution, and review stages increased the total number of model interactions. Google Gemini generally exhibited the longest execution durations under the most complex workflow conditions.
-
-Token consumption followed the same trend (Figure 5). Planner–Executor–Reviewer workflows consumed substantially more tokens than Basic Agent workflows, frequently exceeding five times the average token usage observed in the baseline configuration.
-
-These results demonstrate a clear trade-off between performance and operational efficiency. While more sophisticated workflow architectures often produced improvements in quality, such gains were accompanied by higher costs, longer execution times, and greater token consumption.
+Operational-efficiency analysis showed that workflow complexity increased resource requirements. Basic Agent had the lowest mean cost and duration, while Planner–Executor–Reviewer had the highest resource use. Figure 3 (`figure_03_cost_quality_tradeoff.png`) presents the cost–quality trade-off, and Figure 4 (`figure_04_operational_efficiency_ranking.png`) summarizes the top configurations by a descriptive balanced-efficiency index. These results indicate that workflow selection involves practical trade-offs among quality proxy, cost, latency, and token usage.
