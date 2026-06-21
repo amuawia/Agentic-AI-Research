@@ -1,0 +1,23 @@
+# Local agent/private workspace files
+.hermes/
+
+# Environment and credentials
+.env
+*.env
+.env.*
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Python caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Temporary outputs
+tmp/
+*.tmp
