@@ -12,6 +12,7 @@ This directory contains finalized statistical output files for Study 002.
 | anova_results.xlsx            | Complete | Inferential statistics results for provider, workflow, and provider × workflow effects. |
 | effect_sizes.xlsx             | Complete | Partial eta squared effect size analysis and interpretation for all ANOVA effects. |
 | measurement_validity_audit.xlsx | Complete | Audit of the relationship between `quality_score` and `confidence` across workflow/provider configurations. |
+| robustness_sensitivity.xlsx | Complete | Robust descriptive sensitivity checks, including median/IQR summaries, bootstrap confidence intervals, IQR outlier sensitivity, reviewer vs non-reviewer comparison, and simple mean-difference contrasts. |
 
 ## Source Dataset
 
