@@ -2,7 +2,7 @@
 
 ## 3.1 Study Objective and Positioning
 
-The objective of Study 002 is to evaluate how foundation model provider and agentic workflow architecture are associated with operational outcomes in controlled AI workflow execution. The study is positioned as an exploratory operational benchmark rather than a definitive human-rated assessment of answer quality. Its purpose is to provide reproducible system-level evidence about provider × workflow configurations, including quality-proxy behavior, confidence, cost, duration, token consumption, and workflow complexity.
+The objective of Study 002 is to evaluate how foundation model provider and agentic workflow architecture are associated with operational outcomes in controlled AI workflow execution. The study is positioned as an exploratory operational benchmark rather than an independent human-rated assessment of answer quality. Its purpose is to provide reproducible system-level evidence about provider × workflow configurations, including quality-proxy behavior, confidence, cost, duration, token consumption, and workflow complexity.
 
 The study extends an earlier single-provider workflow comparison by introducing multiple foundation model providers while preserving the same task bank, prompt version, workflow definitions, and execution protocol. This design enables the analysis to distinguish provider-associated effects, workflow-associated effects, and provider × workflow interactions under a common experimental framework.
 
@@ -105,6 +105,8 @@ Additional analyses were added to strengthen journal readiness without collectin
 - **Publication figures and tables:** generated reproducible visual and tabular outputs for manuscript preparation.
 
 These analyses support a cautious interpretation of observed provider/workflow patterns while improving transparency about measurement scope, robustness, and practical deployment trade-offs.
+
+The same analysis-ready dataset was also used to generate the publication assets reported in the Results section: `results/publication_tables_v2.md`, `results/publication_tables_v2.xlsx`, and the four publication figures under `results/figures_publication/`. These assets were treated as reporting outputs derived from the validated statistical pipeline, not as separate sources of evidence.
 
 ## 3.10 Reproducibility Strategy
 

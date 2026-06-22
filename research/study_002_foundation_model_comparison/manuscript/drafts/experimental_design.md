@@ -200,3 +200,6 @@ Three workflow architectures were selected because they represent increasing lev
 The benchmark consisted of 30 tasks distributed across Knowledge, Reasoning, and Coding categories. This scale was selected to provide meaningful task diversity while maintaining manageable experimental complexity. The primary task-bank balance was category-based, with 10 tasks assigned to each of the three categories. Difficulty labels were added later as a secondary annotation layer and were not used as the primary balancing criterion. The resulting design generated 270 official executions, providing sufficient observations to support statistical comparison of providers, workflows, and interaction effects.
 
 Collectively, these design decisions produced a controlled experimental framework capable of evaluating both performance outcomes and operational trade-offs across a representative set of contemporary agentic AI configurations.
+
+
+This structure directly supports the publication tables and figures used in the manuscript: provider × workflow summaries, task-category summaries, cost–quality trade-off visualization, and operational-efficiency ranking. Difficulty annotations are reported only as secondary descriptive strata because the official design was balanced by task category rather than by difficulty.

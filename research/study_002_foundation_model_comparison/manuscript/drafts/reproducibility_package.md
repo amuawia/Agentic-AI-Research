@@ -67,6 +67,10 @@ The analytical workflow included:
 * Formal assumption testing
 * Analysis of variance
 * Effect size estimation
+* Measurement-validity auditing
+* Robustness and sensitivity analysis
+* Task-stratified analysis
+* Operational-efficiency analysis
 
 Supporting scripts were retained within:
 
@@ -92,19 +96,22 @@ The repository includes:
 * Publication figures
 * Statistical summaries
 
-Final publication figures were maintained within:
+Final manuscript-facing publication figures were maintained within:
 
 ```text
-results/figures/
+results/figures_publication/
 ```
 
-while publication tables were preserved within:
+while publication tables were preserved as both spreadsheet and Markdown summaries:
 
 ```text
-results/publication_tables.xlsx
+results/publication_tables_v2.xlsx
+results/publication_tables_v2.md
 ```
 
 Separating publication assets from intermediate analytical work reduces the likelihood of inconsistencies between reported findings and underlying statistical results.
+
+The four current publication figures report: (1) mean operational quality proxy by provider × workflow, (2) quality proxy by task category, (3) cost–quality trade-off by provider × workflow, and (4) operational-efficiency ranking. These files are reporting artifacts generated from the validated dataset and should be interpreted using the measurement-validity limitations described in the manuscript.
 
 ## 9.6 Execution Logging and Traceability
 

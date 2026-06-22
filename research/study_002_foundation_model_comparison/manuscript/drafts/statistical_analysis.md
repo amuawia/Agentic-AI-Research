@@ -2,86 +2,68 @@
 
 ## 5.1 Analysis Objectives
 
-The statistical analysis was designed to evaluate the relative effects of foundation model provider and workflow architecture on agentic AI system performance. In addition to examining the independent contributions of these factors, the analysis sought to determine whether workflow effectiveness varied across providers.
+The statistical analysis was designed to evaluate how foundation model provider and workflow architecture were associated with operational outcomes in Study 002. The analysis followed the balanced 3 × 3 factorial structure of the experiment, with provider and workflow as the two primary experimental factors. The analysis was not intended to produce permanent provider rankings or independent human-rated quality claims. Instead, it was designed to provide reproducible evidence about operational quality-proxy behavior, model-reported confidence, and deployment-relevant resource trade-offs.
 
 The primary analytical objectives were:
 
-* To quantify performance differences between foundation model providers.
-* To quantify performance differences between workflow architectures.
-* To evaluate interaction effects between provider selection and workflow architecture.
-* To assess the magnitude of observed effects using effect size measures.
-* To characterize operational trade-offs associated with workflow complexity.
+- to quantify differences associated with foundation model provider;
+- to quantify differences associated with workflow architecture;
+- to evaluate provider × workflow interaction effects;
+- to estimate effect magnitudes alongside statistical significance;
+- to audit the relationship between `quality_score` and confidence;
+- to examine robustness and sensitivity of descriptive patterns; and
+- to connect statistical results with publication figures, publication tables, and operational-efficiency summaries.
 
-The primary outcome variables analyzed in this study were quality score and confidence. Additional operational metrics, including cost, execution duration, and total token consumption, were examined using descriptive statistical methods.
+The primary outcome variables were `quality_score`, interpreted as an operational workflow-generated quality proxy, and confidence, interpreted as model-reported self-assessment. Additional operational metrics included estimated cost, execution duration, total token consumption, and model call count.
 
 ## 5.2 Dataset Preparation
 
-Statistical analyses were conducted using the frozen analysis dataset generated following completion of data collection and validation procedures.
+All analyses used the frozen analysis-ready dataset:
 
-Prior to formal analysis, the dataset was examined for completeness and consistency. Validation procedures confirmed that no missing values were present in the primary outcome variables, including quality score, confidence, cost, duration, and token consumption. Provider allocations and workflow allocations were verified to be consistent with the experimental design.
+`Agentic_AI_Experiments_Main_Study002_V1.4.4_270Runs_AnalysisReady.xlsx`
 
-The final analysis dataset contained 270 observations distributed across three providers and three workflow architectures. This dataset served as the sole source for all descriptive statistics, assumption testing, inferential analyses, and effect size calculations reported in the study.
+The dataset contained 270 validated observations from 30 benchmark tasks executed across three providers and three workflow architectures. Each provider × workflow cell contained 30 observations. The task bank was balanced by category, with 10 Knowledge, 10 Reasoning, and 10 Coding tasks. Difficulty labels were retained as secondary annotations rather than as the primary balancing criterion.
 
-## 5.3 Assumption Testing
+Before analysis, the dataset was checked for completeness, provider/workflow consistency, task coverage, and availability of the primary outcome and operational variables. Dataset validation outputs were preserved in `analysis/statistical_outputs/dataset_validation_report.xlsx`.
 
-Before conducting inferential statistical analyses, assumption testing procedures were performed to evaluate the suitability of the dataset for analysis of variance methods.
+## 5.3 Descriptive Statistics
 
-The assessment focused on the assumptions commonly associated with factorial ANOVA, including distributional characteristics and variance behavior across experimental groups. Formal assumption testing outputs were generated and reviewed prior to hypothesis testing.
+Descriptive statistics were generated before inferential testing to summarize central tendencies, dispersion, and operational trade-offs. These summaries included provider-level, workflow-level, provider × workflow, task-category, and difficulty-annotation views.
 
-The purpose of these procedures was not to establish perfect conformity to theoretical assumptions but rather to identify substantial violations that could undermine the validity of subsequent analyses. Given the balanced structure of the experimental design and the sample sizes available within the study, ANOVA was considered an appropriate analytical approach for evaluating the primary research questions.
+The publication reporting package uses these descriptive outputs in two forms. First, `results/publication_tables_v2.md` and `results/publication_tables_v2.xlsx` summarize provider × workflow outcomes, task-category outcomes, secondary difficulty annotations, and top operational-efficiency configurations. Second, the four publication figures in `results/figures_publication/` visualize mean quality by provider × workflow, quality by task category, cost–quality trade-offs, and operational-efficiency rankings.
 
-All assumption testing results were documented and preserved within the study's statistical output files to ensure transparency and reproducibility.
+## 5.4 Assumption Testing
 
-## 5.4 Analysis of Variance
+Assumption testing was conducted for the primary outcomes before applying factorial ANOVA. The assessment included distributional checks and homogeneity-of-variance checks across experimental groups. Statistical outputs were preserved in `analysis/statistical_outputs/assumption_tests.xlsx` and `analysis/statistical_outputs/formal_assumption_tests.xlsx`.
 
-The primary inferential analyses were conducted using two-way analysis of variance (ANOVA).
+The tests indicated that the data did not fully satisfy all parametric assumptions. Because the design was balanced with equal cell sizes, two-way ANOVA was retained as the primary inferential method, but results were interpreted alongside effect sizes, descriptive statistics, robustness and sensitivity checks, and measurement-validity evidence. This approach supports cautious interpretation rather than overreliance on p-values.
 
-Two-way ANOVA was selected because the experimental design included two categorical independent variables, foundation model provider and workflow architecture, and because the study sought to evaluate both main effects and interaction effects.
+## 5.5 Two-Way ANOVA and Effect Sizes
 
-Separate ANOVA models were performed for quality score and confidence.
+Two-way ANOVA was used to estimate provider effects, workflow effects, and provider × workflow interaction effects for the primary outcomes. Separate models were used for the operational quality proxy and confidence. This framework aligned with the factorial experimental design and allowed the study to test whether workflow behavior differed across providers.
 
-The analysis framework enabled evaluation of:
+Effect size estimation was performed using partial eta squared (partial η²). Effect sizes were reported alongside F statistics and p-values to support practical interpretation of the observed effects. ANOVA outputs were preserved in `analysis/statistical_outputs/anova_results.xlsx`, and effect size outputs were preserved in `analysis/statistical_outputs/effect_sizes.xlsx`.
 
-* The main effect of provider.
-* The main effect of workflow architecture.
-* The Provider × Workflow interaction effect.
+## 5.6 Measurement-Validity Audit
 
-The inclusion of interaction effects was particularly important because workflow architectures may not exhibit identical behavior across different foundation model providers. Examining interaction effects therefore provided additional insight beyond simple comparisons of average performance.
+Because `quality_score` was generated by workflow outputs rather than by independent human raters, a measurement-validity audit was included as a required interpretive step. The audit examined where `quality_score` equaled confidence and where the two variables diverged across workflows, providers, and provider × workflow cells.
 
-This analytical approach aligned directly with the factorial structure of the experimental design and allowed simultaneous assessment of multiple sources of variation within a unified statistical framework.
+This audit was especially important because Basic Agent and Planner–Executor workflows did not include an independent reviewer stage. In those workflows, the parser could use confidence as the operational quality proxy when no separate quality score was emitted. In contrast, Planner–Executor–Reviewer included a review stage capable of emitting a distinct review-derived score. The audit output was preserved in `analysis/statistical_outputs/measurement_validity_audit.xlsx`.
 
-## 5.5 Effect Size Estimation
+## 5.7 Robustness, Sensitivity, and Task-Stratified Analyses
 
-Statistical significance alone does not indicate the practical importance of an observed effect. Consequently, effect size estimation was performed in addition to significance testing.
+Robustness and sensitivity analyses were added to strengthen journal readiness without collecting new data. These checks included medians, interquartile ranges, deterministic bootstrap confidence intervals, trimmed means, IQR-based outlier sensitivity, reviewer versus non-reviewer comparisons, and simple mean-difference contrasts. They are reported as descriptive sensitivity evidence, not as replacements for independent human validation.
 
-Partial eta squared (partial η²) was used as the primary measure of effect magnitude for ANOVA results. Effect size estimates were calculated for provider effects, workflow effects, and interaction effects.
+Task-stratified analyses summarized outcomes by the original task categories and by the secondary difficulty annotations. These outputs support transparent reporting of whether patterns were consistent across Knowledge, Reasoning, and Coding tasks while avoiding overclaims about difficulty-balanced design. Robustness and task-stratified outputs were preserved in `analysis/statistical_outputs/robustness_sensitivity.xlsx` and `analysis/statistical_outputs/task_stratified_analysis.xlsx`.
 
-The inclusion of effect size measures enabled evaluation of the relative influence of experimental factors and supported interpretation beyond binary significance decisions. This was particularly important because large sample sizes may produce statistically significant findings even when practical effects are limited.
+## 5.8 Operational-Efficiency Analysis
 
-Effect size results were reported alongside ANOVA findings throughout the study and were incorporated into the interpretation of performance differences between providers and workflow architectures.
+Operational-efficiency analysis examined how quality-proxy outcomes related to cost, duration, token consumption, and model call count. The analysis produced descriptive metrics such as quality per dollar, quality per 1,000 tokens, quality per second, and a balanced operational-efficiency index.
 
-## 5.6 Significance Thresholds and Reporting
+These efficiency outputs support the manuscript's practical contribution: workflow complexity must be evaluated against deployment constraints. The operational-efficiency workbook was preserved in `analysis/statistical_outputs/operational_efficiency.xlsx`, and the corresponding manuscript-facing summaries are reported in Table 4 and Figure 4.
 
-Statistical significance was evaluated using a threshold of α = 0.05.
+## 5.9 Reporting and Reproducibility
 
-For each inferential analysis, test statistics, p-values, and effect size estimates were reported to support transparent interpretation of results. Findings were interpreted using both statistical significance and effect magnitude rather than relying exclusively on p-values.
+All statistical outputs were generated from the frozen analysis-ready dataset and retained in the public repository. The analysis pipeline preserved dataset validation, descriptive statistics, assumption testing, ANOVA, effect sizes, measurement-validity auditing, robustness and sensitivity checks, task-stratified summaries, operational-efficiency analysis, publication tables, and publication figures.
 
-Descriptive statistics were reported to summarize central tendencies and variability across providers and workflow architectures. Inferential results were subsequently used to evaluate the study hypotheses and identify meaningful performance differences within the experimental design.
-
-All statistical outputs, including descriptive statistics, assumption tests, ANOVA results, and effect size calculations, were preserved within the study repository as part of the reproducibility package.
-
-## 5.7 Rationale for Analytical Approach
-
-The analytical approach was selected to align with the factorial structure of the experimental design. Because the study simultaneously examined multiple foundation model providers and multiple workflow architectures, an analytical method capable of evaluating both independent and combined effects was required.
-
-Two-way ANOVA provides a suitable framework for such investigations because it enables simultaneous assessment of main effects and interaction effects within a single model. This capability was particularly important for the present study because a central research question concerned whether workflow effectiveness remained consistent across providers.
-
-Alternative approaches based solely on pairwise comparisons would have provided less information regarding interaction behavior and would not have aligned as closely with the structure of the experimental design. Consequently, the selected analytical framework supported a more comprehensive evaluation of the relationships among the experimental variables.
-
-## 5.8 Statistical Reproducibility
-
-To support transparency and reproducibility, all statistical procedures were preserved through dedicated analysis scripts and documented output files.
-
-The analytical workflow included dataset validation, descriptive statistics generation, assumption testing, analysis of variance procedures, and effect size estimation. Intermediate outputs and final statistical results were retained within the study repository to provide traceability between the analysis-ready dataset and reported findings.
-
-The preservation of scripts, datasets, and statistical outputs reduces dependence on manual calculations and facilitates future verification of reported results. This approach also supports independent replication efforts and aligns with emerging expectations regarding reproducible empirical AI research.
+The reporting strategy therefore links each manuscript claim to a reproducible artifact. Inferential claims are based on ANOVA and effect-size outputs, descriptive claims are based on generated tables and figures, and interpretive claims are bounded by the measurement-validity audit and threats-to-validity discussion.

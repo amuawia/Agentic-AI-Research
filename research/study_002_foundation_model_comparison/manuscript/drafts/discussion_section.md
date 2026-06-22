@@ -26,6 +26,8 @@ The operational results show that workflow sophistication has measurable deploym
 
 This is especially relevant for enterprise settings. A system that produces slightly stronger outputs may be less useful if it is slower, more expensive, or harder to scale. The cost–quality and efficiency-ranking figures therefore provide practical evidence for selecting workflows under operational constraints, not merely under quality-oriented benchmarks.
 
+In the publication assets, Figure 3 makes this trade-off visible by placing mean quality proxy against mean cost, while Figure 4 and Table 4 summarize descriptive balanced-efficiency rankings. These outputs should be read as deployment-oriented decision aids, not as universal rankings, because organizations may weight cost, latency, quality proxy, and reliability differently.
+
 ## 7.5 Implications for Research and Deployment
 
 For researchers, the study shows the value of reporting provider × workflow interactions, measurement-validity audits, and operational metrics alongside primary performance results. For practitioners, it suggests that deployment decisions should not be based on provider reputation or workflow complexity alone. Instead, teams should evaluate the specific configuration they intend to use, using metrics that reflect both output behavior and operational feasibility.

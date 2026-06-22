@@ -16,7 +16,7 @@ Construct validity is the most important limitation of this study. The variable 
 
 The measurement-validity audit showed that `quality_score` was identical to confidence for all Basic Agent and Planner–Executor observations. This occurred because those workflows did not include an independent reviewer stage, and the parser used confidence as the quality proxy when no separate quality score was emitted. In the Planner–Executor–Reviewer workflow, quality and confidence were mostly distinct because the reviewer stage could emit a review-derived score.
 
-As a result, quality-related conclusions should be interpreted cautiously. The study provides reproducible operational evidence about workflow-generated metrics, not a definitive assessment of human-perceived answer quality. Confidence also has construct limitations because it represents model-reported self-assessment rather than externally calibrated certainty. Future work should add independent human raters, inter-rater reliability, and a multi-dimensional scoring rubric covering factual accuracy, completeness, reasoning quality, usefulness, and safety.
+As a result, quality-related conclusions should be interpreted cautiously. The study provides reproducible operational evidence about workflow-generated metrics, not an independent assessment of human-perceived answer quality. Confidence also has construct limitations because it represents model-reported self-assessment rather than externally calibrated certainty. Future work should add independent human raters, inter-rater reliability, and a multi-dimensional scoring rubric covering factual accuracy, completeness, reasoning quality, usefulness, and safety.
 
 Operational metrics also have scope limits. Estimated cost, duration, and token use are important deployment indicators, but they do not capture every practical factor, such as rate limits, integration complexity, infrastructure overhead, availability guarantees, or organizational compliance requirements.
 
@@ -34,7 +34,9 @@ The balanced factorial design supports comparison across provider and workflow c
 
 Assumption testing indicated that the data did not fully satisfy all parametric assumptions. For this reason, the study reports effect sizes, robustness and sensitivity analyses, medians, interquartile ranges, bootstrap confidence intervals, outlier checks, reviewer versus non-reviewer comparisons, and task-stratified summaries. These analyses support cautious interpretation but do not replace independent validation using human-rated outcomes.
 
-The operational-efficiency index is descriptive. It normalizes observed quality-proxy behavior against cost, duration, and token use, but it should not be interpreted as a universal ranking criterion. Different deployment contexts may weight cost, latency, quality, and reliability differently.
+The operational-efficiency index is descriptive. It normalizes observed quality-proxy behavior against cost, duration, and token use, but it should not be interpreted as a context-free ranking rule. Different deployment contexts may weight cost, latency, quality, and reliability differently.
+
+The publication tables and figures inherit the same limitations. They summarize the validated dataset and improve reporting clarity, but they do not transform workflow-generated proxies into human-rated quality evidence or make the efficiency index a context-independent optimization target.
 
 ## 8.5 Reproducibility and Temporal Validity
 
